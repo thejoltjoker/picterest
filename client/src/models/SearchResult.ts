@@ -1,4 +1,5 @@
+import { ImageItem } from "./ImageItem";
+
 export interface SearchResult {
-  id: string;
-  url: string;
+  results: ImageItem[];
 }
