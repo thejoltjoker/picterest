@@ -1,64 +1,81 @@
 import { NextFunction, Request, Response } from "express";
+import { ImageItem } from "../models/ImageItem";
+import { UserFavorite } from "../models/UserFavorite";
+import {
+  create as createFavorite,
+  get as getFavorites,
+  remove as removeFavorite,
+  update as updateFavorite,
+} from "../services/favorites.service";
 
-export const get = async (req: Request, res: Response, next: NextFunction) => {
+export const get = async (
+  req: Request<{ userId: string }, {}, {}, {}>,
+  res: Response,
+  next: NextFunction
+) => {
+  console.log(req.params);
   try {
-    res.status(200).json({});
+    const favorites = await getFavorites(req.params.userId);
+    if (!favorites) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ favorites: favorites });
   } catch (err) {
-    console.error(`Error while getting programming languages`, err);
+    console.error(`Error while getting favorites`, err);
     next(err);
   }
 };
 
 export const create = async (
-  req: Request,
+  req: Request<{ userId: string }, {}, ImageItem, {}>,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    res.status(200).json({});
+    const favorite = await createFavorite(req.params.userId, req.body);
+    if (!favorite) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ favorite: favorite });
   } catch (err) {
-    console.error(`Error while creating programming language`, err);
+    console.error(`Error while creating favorite`, err);
     next(err);
   }
 };
 
-// app.post(
-//   "/api/users/:userId/favorites",
-
-//   async (req: Request, res: Response) => {
-//     try {
-//       res.status(200).json({});
-//       res.status(200).json({ saved: result });
-//     } catch (error) {
-//       const message = "Failed to save image to user";
-//       console.error(message, error);
-//       res.status(500).json({ message: message });
-//     }
-//   }
-// );
-
 export const update = async (
-  req: Request,
+  req: Request<{ userId: string; favoriteId: string }, {}, UserFavorite, {}>,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    res.status(200).json({});
+    const favorite = await updateFavorite(req.params.userId, req.body);
+    if (!favorite) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ favorite: favorite });
   } catch (err) {
-    console.error(`Error while updating programming language`, err);
+    console.error(`Error while updating favorite`, err);
     next(err);
   }
 };
 
 export const remove = async (
-  req: Request,
+  req: Request<{ userId: string; favoriteId: string }, {}, {}, {}>,
   res: Response,
   next: NextFunction
 ) => {
   try {
+    const response = await removeFavorite(
+      req.params.userId,
+      req.params.favoriteId
+    );
+    if (!response) {
+      return res.status(404).json({ message: "User not found" });
+    }
     res.status(200).json({});
   } catch (err) {
-    console.error(`Error while deleting programming language`, err);
+    console.error(`Error while deleting favorite`, err);
     next(err);
   }
 };

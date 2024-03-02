@@ -1,0 +1,33 @@
+GET http://localhost:3000/api/user/1709377116960/favorites
+###
+POST http://localhost:3000/api/user/1709377116960/favorites
+Content-Type: application/json
+
+{
+  "title": "Example title",
+  "snippet": "Example snippet",
+  "contextLink": "http://example.com",
+  "link": "http://example.com/image.jpg",
+  "thumbnailLink": "http://example.com/thumb.jpg",
+  "thumbnailWidth": 123,
+  "thumbnailHeight": 456
+}
+
+###
+PUT http://localhost:3000/api/user/1709377116960/favorites/6163f09ac470dd7d34061aa26f24eaafc263a44b
+Content-Type: application/json
+
+{
+  "title": "Example title - updated",
+  "snippet": "Example snippet",
+  "contextLink": "http://example.com",
+  "link": "http://example.com/image.jpg",
+  "thumbnailLink": "http://example.com/thumb.jpg",
+  "thumbnailWidth": 123,
+  "thumbnailHeight": 456,
+  "favoriteId":"6163f09ac470dd7d34061aa26f24eaafc263a44b"
+}
+
+###
+DELETE http://localhost:3000/api/user/1709377116960/favorites/2a
+###

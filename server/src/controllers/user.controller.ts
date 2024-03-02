@@ -7,6 +7,8 @@ import {
   update as updateUser,
 } from "../services/user.service";
 
+// TODO 404 messages
+
 export const get = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await getUser(req.params.userId);
