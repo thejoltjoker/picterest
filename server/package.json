@@ -7,8 +7,7 @@
     "test": "jest --watch",
     "build": "tsc",
     "start": "npm run build && node dist/server.js",
-    "dev": "nodemon src/server.ts",
-    "swagger": "tsoa spec"
+    "dev": "nodemon src/server.ts"
   },
   "keywords": [],
   "author": "Johannes",
