@@ -1,9 +1,9 @@
-import { ImageItem } from "./ImageItem";
+import { UserFavorite } from "./UserFavorite";
 
 export class User {
   constructor(
     public email: string,
-    public favorites: ImageItem[],
+    public favorites: UserFavorite[],
     public userId?: string
   ) {}
 }
