@@ -1,3 +1,8 @@
 {
-  "workbench.editor.openSideBySideDirection": "down"
+  "workbench.editor.openSideBySideDirection": "down",
+  "todo-tree.tree.showBadges": true,
+  "markdownlint.config": {
+    "MD026":false,
+    "MD033":false
+  }
 }
