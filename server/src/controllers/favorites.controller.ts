@@ -13,7 +13,6 @@ export const get = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(req.params);
   try {
     const favorites = await getFavorites(req.params.userId);
     if (!favorites) {
@@ -31,6 +30,12 @@ export const create = async (
   res: Response,
   next: NextFunction
 ) => {
+  /**
+    #swagger.requestBody = {
+        required: true,
+        schema: { $ref: "#/components/schemas/ImageItem" }
+    }
+     */
   try {
     const favorite = await createFavorite(req.params.userId, req.body);
     if (!favorite) {
