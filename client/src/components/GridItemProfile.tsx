@@ -1,26 +1,21 @@
 import { ImageItem } from "../models/ImageItem";
 
-type Props = { data: ImageItem };
+interface GridItemProfileProps {
+  data: ImageItem;
+}
 
-const SearchResultItem = ({ data }: Props) => {
+const GridItemProfile = ({ data }: GridItemProfileProps) => {
   return (
-    <div
-      className="group relative mt-4 rounded-2xl bg-slate-200 transition duration-300 first:mt-0 hover:scale-[103%] md:mt-8"
-      style={{
-        aspectRatio: `${data.thumbnailWidth} / ${data.thumbnailHeight}`,
-      }}
-    >
-      <div className="image-title absolute bottom-3 left-3 z-20 max-w-[85%] overflow-clip whitespace-nowrap text-white opacity-0 transition duration-200 group-hover:opacity-100">
+    <div className="group relative mt-4 rounded-2xl bg-slate-200 transition duration-300 first:mt-0 hover:scale-[103%] md:mt-8">
+      <div className="image-title absolute bottom-3 left-3 z-20 w-full overflow-clip whitespace-nowrap text-white opacity-0 transition duration-200 group-hover:opacity-100">
         {data.title}
       </div>
-      <div className="absolute left-3 top-3 z-20 text-white">
+      <div className="absolute left-3 top-3 z-20 rounded-full p-1 text-white transition group-hover:bg-blue-500">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          fill="none"
           viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="h-6 w-6"
+          fill="currentColor"
+          className="stroke h-6 w-6 translate-y-[1px] fill-none stroke-white stroke-2 group-hover:fill-white"
         >
           <path
             strokeLinecap="round"
@@ -46,13 +41,16 @@ const SearchResultItem = ({ data }: Props) => {
         </svg>
       </div>
       <img
-        src={data.thumbnailUrl}
+        src={data.thumbnailLink}
         alt={data.title}
         className="z-10 w-full overflow-hidden rounded-2xl transition duration-300 group-hover:shadow-xl"
-        onMouseOver={(e) => (e.currentTarget.src = data.imageUrl)}
+        style={{
+          aspectRatio: `${data.thumbnailWidth} / ${data.thumbnailHeight}`,
+        }}
+        onMouseOver={(e) => (e.currentTarget.src = data.link)}
       />
     </div>
   );
 };
 
-export default SearchResultItem;
+export default GridItemProfile;
