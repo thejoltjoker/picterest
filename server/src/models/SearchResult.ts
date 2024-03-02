@@ -4,6 +4,8 @@ export interface SearchResult {
   queries: Queries;
   context: Context;
   searchInformation: SearchInformation;
+  promotions?: object[];
+  spelling?: Spelling;
   items: Item[];
 }
 
@@ -19,42 +21,27 @@ export interface Item {
   displayLink: string;
   snippet: string;
   htmlSnippet: string;
-  cacheId: string;
-  formattedUrl: string;
-  htmlFormattedUrl: string;
-  pagemap: Pagemap;
+  mime: FileFormat;
+  fileFormat: FileFormat;
+  image: Image;
+}
+
+export enum FileFormat {
+  ImageJPEG = "image/jpeg",
+}
+
+export interface Image {
+  contextLink: string;
+  height: number;
+  width: number;
+  byteSize: number;
+  thumbnailLink: string;
+  thumbnailHeight: number;
+  thumbnailWidth: number;
 }
 
 export enum Kind {
   CustomsearchResult = "customsearch#result",
-}
-
-export interface Pagemap {
-  cse_thumbnail?: CSEThumbnail[];
-  metatags: { [key: string]: string }[];
-  cse_image?: CSEImage[];
-  offer?: Offer[];
-  document?: Document[];
-}
-
-export interface CSEImage {
-  src: string;
-}
-
-export interface CSEThumbnail {
-  src: string;
-  width: string;
-  height: string;
-}
-
-export interface Document {
-  keywords: string;
-  keyword: string;
-}
-
-export interface Offer {
-  price: string;
-  url: string;
 }
 
 export interface Queries {
@@ -72,6 +59,7 @@ export interface NextPage {
   outputEncoding: string;
   safe: string;
   cx: string;
+  searchType: string;
 }
 
 export interface SearchInformation {
@@ -79,6 +67,11 @@ export interface SearchInformation {
   formattedSearchTime: string;
   totalResults: string;
   formattedTotalResults: string;
+}
+
+export interface Spelling {
+  correctedQuery: string;
+  htmlCorrectedQuery: string;
 }
 
 export interface URL {

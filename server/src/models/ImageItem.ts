@@ -1,11 +1,11 @@
 export class ImageItem {
   constructor(
     public title: string,
-    public description: string,
+    public snippet: string,
+    public contextLink: string,
     public link: string,
-    public thumbnailUrl: string,
-    public thumbnailWidth: string,
-    public thumbnailHeight: string,
-    public imageUrl: string
+    public thumbnailLink: string,
+    public thumbnailWidth: number,
+    public thumbnailHeight: number
   ) {}
 }

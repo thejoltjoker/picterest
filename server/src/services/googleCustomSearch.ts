@@ -1,6 +1,11 @@
 import axios from "axios";
 import "dotenv/config";
+import { promises as fs } from "fs";
+import path from "path";
+import { SocksProxyAgent } from "socks-proxy-agent";
 import { SearchResult } from "../models/SearchResult";
+
+const proxyAgent = new SocksProxyAgent(process.env.PROXY_URL ?? "");
 
 export const search = async (
   query: string,
@@ -23,12 +28,25 @@ export const search = async (
     const url = new URL("https://www.googleapis.com/customsearch/v1");
     url.searchParams.append("key", process.env.GOOGLE_API_KEY ?? "");
     url.searchParams.append("cx", process.env.SEARCH_ENGINE_ID ?? "");
-    url.searchParams.append("q", query);
+    url.searchParams.append("searchType", "image");
     url.searchParams.append("start", start);
     url.searchParams.append("num", num);
+    url.searchParams.append("q", query);
 
-    const response = await axios.get<SearchResult>(url.toString());
-    return response.data;
+    // TODO Remove proxy before publishing
+    if (process.env.NODE_ENV == "production") {
+      const response = await axios.get<SearchResult>(url.toString(), {
+        httpAgent: proxyAgent,
+        httpsAgent: proxyAgent,
+      });
+      return response.data;
+    } else {
+      const data = await fs.readFile(
+        path.resolve(__dirname, "./mockResult.json"),
+        "utf-8"
+      );
+      return JSON.parse(data);
+    }
   } catch (error) {
     console.error("Error while performing search", error);
     throw error;
