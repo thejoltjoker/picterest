@@ -1,40 +1,53 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import { UserContext } from "../contexts/UserContext";
+import { FavoritesContext } from "../contexts/FavoritesContext";
 
 import { Auth0Provider } from "@auth0/auth0-react";
-import axios from "axios";
 import { useEffect, useReducer } from "react";
-import { User } from "../models/User";
-import { UserActionType, UserReducer } from "../reducers/UserReducer";
+import {
+  FavoritesActionType,
+  FavoritesReducer,
+} from "../reducers/FavoritesReducer";
+import { getFavorites } from "../services/user.service";
 
 const MainLayout = () => {
-  const [user, userDispatch] = useReducer(UserReducer, {
-    userId: "0",
-    email: "",
-    favorites: [],
-  });
+  const initialState = [
+    {
+      imageId: "initial",
+      title: "",
+      snippet: "",
+      contextLink: "",
+      link: "",
+      thumbnailLink: "",
+      thumbnailWidth: 0,
+      thumbnailHeight: 0,
+    },
+  ];
+  const [favorites, dispatch] = useReducer(FavoritesReducer, initialState);
 
   useEffect(() => {
-    if (user.userId != "0") return;
     let ignore = false;
-    const fetchUser = async () => {
-      try {
-        const userId = "1";
-        const url = `http://localhost:3000/api/user/${userId}`;
-        const response = await axios.get<User>(url);
-        if (response && !ignore) {
-          console.log(response.data);
-          userDispatch({
-            type: UserActionType.SET,
-            payload: { ...response.data },
-          });
+    if (favorites.length == 1 && favorites[0].imageId === "initial") {
+      const fetchUser = async () => {
+        try {
+          const userId = "1";
+
+          const response = await getFavorites(userId);
+          if (response && !ignore) {
+            console.log(response);
+            dispatch({
+              type: FavoritesActionType.Set,
+              payload: response,
+            });
+          }
+        } catch (error) {
+          console.error("Error when getting user.");
         }
-      } catch (error) {
-        console.error("Error when getting user.");
-      }
-    };
-    fetchUser();
+      };
+      fetchUser();
+    } else {
+      return;
+    }
     return () => {
       ignore = true;
     };
@@ -48,10 +61,10 @@ const MainLayout = () => {
           redirect_uri: window.location.origin,
         }}
       >
-        <UserContext.Provider value={{ user, dispatch: userDispatch }}>
+        <FavoritesContext.Provider value={{ favorites, dispatch }}>
           <Navbar />
           <Outlet />
-        </UserContext.Provider>
+        </FavoritesContext.Provider>
       </Auth0Provider>
     </div>
   );

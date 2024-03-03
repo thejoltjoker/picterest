@@ -1,24 +1,18 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ImageGrid from "../components/ImageGrid";
+import { useFavoritesContext } from "../contexts/FavoritesContext";
 import { ImageItem } from "../models/ImageItem";
-import { User } from "../models/User";
-import { useUserContext } from "../contexts/UserContext";
 
 const SavedPage = () => {
   const [images, setImages] = useState<ImageItem[]>();
-  const { user, dispatch } = useUserContext();
-
-  
+  const { favorites, dispatch } = useFavoritesContext();
 
   return (
     <div className="flex">
-      <div className="max-w-1/4 h-full border border-green-400">
-        <p className="text-2xl">{user && user.email}</p>
-      </div>
+      <div className="max-w-1/4 h-full border border-green-400"></div>
       <div className="grow">
-        {images ? (
-          <ImageGrid images={images} />
+        {favorites ? (
+          <ImageGrid images={favorites} />
         ) : (
           <p className="text-center text-slate-500">No images saved.</p>
         )}
