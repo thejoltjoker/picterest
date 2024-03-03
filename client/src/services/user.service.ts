@@ -99,7 +99,7 @@ export const getFavorites = async (userId: string): Promise<ImageItem[]> => {
     const response = await get<GetFavoritesResponse>(
       Endpoint.getFavorites(userId),
     );
-    console.log(response);
+
     return response.favorites;
   } catch (error) {
     console.error("Error while getting favorites");

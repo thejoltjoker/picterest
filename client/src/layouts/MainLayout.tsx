@@ -34,7 +34,6 @@ const MainLayout = () => {
 
           const response = await getFavorites(userId);
           if (response && !ignore) {
-            console.log(response);
             dispatch({
               type: FavoritesActionType.Set,
               payload: response,

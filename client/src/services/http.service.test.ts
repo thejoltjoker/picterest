@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Mock, vi } from "vitest";
-import { get } from "./http";
+import { get } from "./http.service";
 
 vi.mock("axios");
 
