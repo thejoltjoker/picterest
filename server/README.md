@@ -57,10 +57,23 @@ Visit `http://localhost:3000/api/docs` in your browser to access the api documen
 
 ## API Endpoints
 
+### Search
+
+- `GET /api/search`: Search for images.
+  
+### User
+
 - `GET /api/user`: Get a user from the database.
 - `POST /api/user`: Create a user in the database.
-- `PUT /api/user`: Update a user in the database.
-- `DELETE /api/user`: Delete a user from the database.
+- `PUT /api/user/{userId}`: Update a user in the database.
+- `DELETE /api/user/{userId}`: Delete a user from the database.
+
+### Favorites
+
+- `GET /api/user/{userId}/favorites`: Get a user's favorites.
+- `POST /api/user/{userId}/favorites`: Create a new favorite for user.
+- `PUT /api/user/{userId}/favorites/{favoriteId}`: Update a favorite for user.
+- `DELETE /api/user/{userId}/favorites/{favoriteId}`: Delete a favorite for user.
 <!-- TODO Add the rest of the endpoints -->
 
 ## License

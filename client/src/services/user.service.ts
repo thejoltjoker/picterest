@@ -1,3 +1,5 @@
+import { GetFavoritesResponse } from "../models/GetFavoritesResponse";
+import { ImageItem } from "../models/ImageItem";
 import { User } from "../models/User";
 import { get, post, put, remove } from "./http.service";
 
@@ -29,12 +31,16 @@ export class Endpoint {
     return `${Endpoint.baseUrl}user/${encodeURIComponent(userId)}/favorites`;
   }
 
-  public static updateFavorite(userId: string, favoriteId: string) {
-    return `${Endpoint.baseUrl}user/${encodeURIComponent(userId)}/favorites/${encodeURIComponent(favoriteId)}`;
+  public static createFavorite(userId: string) {
+    return `${Endpoint.baseUrl}user/${encodeURIComponent(userId)}/favorites`;
   }
 
-  public static removeFavorite(userId: string, favoriteId: string) {
-    return `${Endpoint.baseUrl}user/${encodeURIComponent(userId)}/favorites/${encodeURIComponent(favoriteId)}`;
+  public static updateFavorite(userId: string, imageId: string) {
+    return `${Endpoint.baseUrl}user/${encodeURIComponent(userId)}/favorites/${encodeURIComponent(imageId)}`;
+  }
+
+  public static removeFavorite(userId: string, imageId: string) {
+    return `${Endpoint.baseUrl}user/${encodeURIComponent(userId)}/favorites/${encodeURIComponent(imageId)}`;
   }
 }
 
@@ -49,6 +55,7 @@ export const getUser = async (userId: string) => {
 };
 
 export const createUser = async (user: User) => {
+  // TODO Add validation
   try {
     const response = await post<User>(
       Endpoint.createUser,
@@ -62,6 +69,7 @@ export const createUser = async (user: User) => {
 };
 
 export const updateUser = async (user: User) => {
+  // TODO Add validation
   try {
     if (!user.userId) throw new Error("No user id on given user");
 
@@ -82,6 +90,57 @@ export const removeUser = async (userId: string) => {
     return response;
   } catch (error) {
     console.error("Error while removing user");
+    throw error;
+  }
+};
+
+export const getFavorites = async (userId: string): Promise<ImageItem[]> => {
+  try {
+    const response = await get<GetFavoritesResponse>(
+      Endpoint.getFavorites(userId),
+    );
+    console.log(response);
+    return response.favorites;
+  } catch (error) {
+    console.error("Error while getting favorites");
+    throw error;
+  }
+};
+
+export const createFavorite = async (userId: string, image: ImageItem) => {
+  // TODO Add validation
+  try {
+    const response = await post<ImageItem>(
+      Endpoint.createFavorite(userId),
+      JSON.stringify(image),
+    );
+    return response;
+  } catch (error) {
+    console.error("Error while creating favorite");
+    throw error;
+  }
+};
+
+export const updateFavorite = async (userId: string, image: ImageItem) => {
+  // TODO Add validation
+  try {
+    const response = await put<ImageItem>(
+      Endpoint.updateFavorite(userId, image.imageId),
+      JSON.stringify(image),
+    );
+    return response;
+  } catch (error) {
+    console.error("Error while updating favorite");
+    throw error;
+  }
+};
+
+export const removeFavorite = async (userId: string, imageId: string) => {
+  try {
+    const response = await remove(Endpoint.removeFavorite(userId, imageId));
+    return response;
+  } catch (error) {
+    console.error("Error while removing favorite");
     throw error;
   }
 };

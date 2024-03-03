@@ -1,4 +1,5 @@
 export interface ImageItem {
+  imageId: string;
   title: string;
   snippet: string;
   contextLink: string;

@@ -15,7 +15,7 @@ export const get = async (req: Request, res: Response, next: NextFunction) => {
     if (!user) {
       return res.status(404).json({});
     }
-    res.status(200).json({ user });
+    res.status(200).json(user);
   } catch (error) {
     console.error("Failed to retrieve user", error);
     res.status(500).send({ message: "Something went wrong" });
@@ -34,7 +34,7 @@ export const create = async (
     if (!user) {
       return res.status(404).json({});
     }
-    res.status(200).json({ user });
+    res.status(200).json(user);
   } catch (err) {
     console.error(`Error while creating user`, err);
     next(err);
@@ -51,7 +51,7 @@ export const update = async (
     if (!user) {
       return res.status(404).json({});
     }
-    res.status(200).json({ user });
+    res.status(200).json(user);
   } catch (err) {
     console.error(`Error while updating user`, err);
     res.status(500).send({ message: "Something went wrong" });
