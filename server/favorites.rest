@@ -25,7 +25,7 @@ Content-Type: application/json
   "thumbnailLink": "http://example.com/thumb.jpg",
   "thumbnailWidth": 123,
   "thumbnailHeight": 456,
-  "favoriteId":"6163f09ac470dd7d34061aa26f24eaafc263a44b"
+  "imageId":"6163f09ac470dd7d34061aa26f24eaafc263a44b"
 }
 
 ###

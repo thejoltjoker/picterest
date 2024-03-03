@@ -1,6 +1,4 @@
-import { sha1digest } from "../helpers/strings";
 import { ImageItem } from "../models/ImageItem";
-import { UserFavorite } from "../models/UserFavorite";
 import { read } from "./database";
 import { update as updateUser } from "./user.service";
 
@@ -14,18 +12,18 @@ export const get = async (userId: string): Promise<ImageItem[] | undefined> => {
 export const create = async (
   userId: string,
   image: ImageItem
-): Promise<UserFavorite | undefined> => {
+): Promise<ImageItem | undefined> => {
   const database = await read();
   const user = database.users.find((u) => u.userId === userId);
   if (!user) return;
 
   const existingFavorite = user.favorites.find(
-    (img) => img.link === image.link
+    (img) => img.imageId === image.imageId
   );
   if (existingFavorite) {
     return existingFavorite;
   }
-  const newFavorite = { ...image, favoriteId: sha1digest(image.link) };
+  const newFavorite = image;
   user.favorites.push(newFavorite);
   await updateUser(user);
 
@@ -34,8 +32,8 @@ export const create = async (
 
 export const update = async (
   userId: string,
-  favorite: UserFavorite
-): Promise<UserFavorite | undefined> => {
+  favorite: ImageItem
+): Promise<ImageItem | undefined> => {
   const database = await read();
   const user = database.users.find((u) => u.userId === userId);
   if (!user) return;
@@ -51,13 +49,13 @@ export const update = async (
 
 export const remove = async (
   userId: string,
-  favoriteId: string
+  imageId: string
 ): Promise<boolean | undefined> => {
   const database = await read();
   const user = database.users.find((u) => u.userId === userId);
   if (!user) return;
 
-  user.favorites = user.favorites.filter((img) => img.favoriteId != favoriteId);
+  user.favorites = user.favorites.filter((img) => img.imageId != imageId);
 
   await updateUser(user);
   return true;

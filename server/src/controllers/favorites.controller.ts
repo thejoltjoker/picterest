@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import { ImageItem } from "../models/ImageItem";
-import { UserFavorite } from "../models/UserFavorite";
 import {
   create as createFavorite,
   get as getFavorites,
@@ -44,7 +43,7 @@ export const create = async (
 };
 
 export const update = async (
-  req: Request<{ userId: string; favoriteId: string }, {}, UserFavorite, {}>,
+  req: Request<{ userId: string; imageId: string }, {}, ImageItem, {}>,
   res: Response,
   next: NextFunction
 ) => {
@@ -61,14 +60,14 @@ export const update = async (
 };
 
 export const remove = async (
-  req: Request<{ userId: string; favoriteId: string }, {}, {}, {}>,
+  req: Request<{ userId: string; imageId: string }, {}, {}, {}>,
   res: Response,
   next: NextFunction
 ) => {
   try {
     const response = await removeFavorite(
       req.params.userId,
-      req.params.favoriteId
+      req.params.imageId
     );
     if (!response) {
       return res.status(404).json({ message: "User not found" });
