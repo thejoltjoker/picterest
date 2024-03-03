@@ -1,5 +1,6 @@
 export class ImageItem {
   constructor(
+    public imageId: string,
     public title: string,
     public snippet: string,
     public contextLink: string,

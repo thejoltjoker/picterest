@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { sha1digest } from "../helpers/strings";
 import { ImageItem } from "../models/ImageItem";
 import { search } from "../services/googleCustomSearch";
 
@@ -12,6 +13,7 @@ export const get = async (req: Request, res: Response, next: NextFunction) => {
       const { contextLink, thumbnailLink, thumbnailWidth, thumbnailHeight } =
         item.image;
       return new ImageItem(
+        sha1digest(link),
         title,
         snippet,
         contextLink,

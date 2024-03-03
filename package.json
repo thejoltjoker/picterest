@@ -1,0 +1,11 @@
+{
+  "name": "react-image-search",
+  "version": "1.0.0",
+  "description": "Full-stack app integrating Google Custom Search and Auth0 for user login, image search, and saving favorites. First assignment of FSU23D Integration course.",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {}
+}
