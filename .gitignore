@@ -128,3 +128,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+server/db.json
+server/exampleResponse.json
+server/image-search-db.json
+server/sandbox.js
+server/src/services/mockResult.json

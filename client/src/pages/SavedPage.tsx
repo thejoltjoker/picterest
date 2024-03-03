@@ -1,11 +1,8 @@
-import { useState } from "react";
 import ImageGrid from "../components/ImageGrid";
 import { useFavoritesContext } from "../contexts/FavoritesContext";
-import { ImageItem } from "../models/ImageItem";
 
 const SavedPage = () => {
-  const [images, setImages] = useState<ImageItem[]>();
-  const { favorites, dispatch } = useFavoritesContext();
+  const { favorites } = useFavoritesContext();
 
   return (
     <div className="flex">

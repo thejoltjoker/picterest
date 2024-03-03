@@ -1,3 +1,4 @@
 {
-  "workbench.editor.openSideBySideDirection": "down"
+  "workbench.editor.openSideBySideDirection": "down",
+  "cmake.configureOnOpen": true
 }
