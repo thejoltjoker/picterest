@@ -1,36 +1,42 @@
 import axios from "axios";
 import { useState } from "react";
 import Button from "../components/Button";
+import ImageGrid from "../components/ImageGrid";
 import SearchErrorIcon from "../components/SearchErrorIcon";
 import SearchLoadingIcon from "../components/SearchLoadingIcon";
-import SearchResults from "../components/SearchResults";
 import { ImageItem } from "../models/ImageItem";
 import { SearchResult } from "../models/SearchResult";
 
 const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [message, setMessage] = useState("");
-
+  const [searchInfo, setSearchInfo] = useState("");
+  const [correctedQuery, setCorrectedQuery] = useState("");
   const [query, setQuery] = useState("");
   const [images, setImages] = useState<ImageItem[]>();
+  const formatter = Intl.NumberFormat("en", { notation: "compact" });
 
-  const handleSearch = async () => {
+  const handleSearch = async (searchQuery: string) => {
     setIsError(false);
+    setCorrectedQuery("");
     try {
       setIsLoading(true);
       const url = new URL(
-        `http://localhost:3000/api/search/${encodeURIComponent(query)}`,
+        `http://localhost:3000/api/search/${encodeURIComponent(searchQuery)}`,
       );
 
       const response = await axios.get<SearchResult>(url.toString());
-      if (response.data) setImages(response.data.results);
+      if (response.data) setImages(response.data.items);
       setIsLoading(false);
-      setMessage(`Found ${10} results in ${0.03}s.`);
+      setSearchInfo(
+        `Found ${formatter.format(Number(response.data.searchInformation.totalResults))} results in ${response.data.searchInformation.formattedSearchTime}s.`,
+      );
+      if (response.data.correctedQuery)
+        setCorrectedQuery(response.data.correctedQuery);
     } catch (error) {
       setIsError(true);
       setIsLoading(false);
-      setMessage("Error when searching for images");
+      setSearchInfo("Error when searching for images");
       console.error("Error when searching for images");
     }
   };
@@ -44,7 +50,7 @@ const SearchPage = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            handleSearch();
+            handleSearch(query);
           }}
         >
           <div className="flex gap-4">
@@ -85,10 +91,26 @@ const SearchPage = () => {
             <Button disabled={query ? false : true}>Search</Button>
           </div>
         </form>
-        {message && <div className="ps-3 pt-4 text-slate-500">{message}</div>}
+        {correctedQuery && (
+          <div className="ps-3 pt-4 text-slate-500">
+            Did you mean{" "}
+            <span
+              className="text-slate-700 underline decoration-blue-500"
+              onClick={() => {
+                setQuery(correctedQuery);
+                handleSearch(correctedQuery);
+              }}
+            >
+              {correctedQuery}
+            </span>
+            ?
+          </div>
+        )}
       </div>
-
-      {images && <SearchResults results={images} />}
+      {searchInfo && (
+        <div className="ps-4 text-slate-500 lg:ps-8">{searchInfo}</div>
+      )}
+      {images && <ImageGrid images={images} />}
     </>
   );
 };

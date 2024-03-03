@@ -1,9 +1,9 @@
 export interface ImageItem {
   title: string;
-  description: string;
+  snippet: string;
+  contextLink: string;
   link: string;
-  thumbnailUrl: string;
-  thumbnailWidth: string;
-  thumbnailHeight: string;
-  imageUrl: string;
+  thumbnailLink: string;
+  thumbnailWidth: number;
+  thumbnailHeight: number;
 }
