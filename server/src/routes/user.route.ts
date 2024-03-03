@@ -6,7 +6,6 @@ import {
   update as updateFavorite,
 } from "../controllers/favorites.controller";
 import { create, get, remove, update } from "../controllers/user.controller";
-import { UserFavoriteSchema } from "../schemas/favorite.schema";
 import { ImageItemSchema } from "../schemas/imageItem.schema";
 import { UserSchema } from "../schemas/user.schema";
 import { validate } from "../validate";
@@ -21,10 +20,10 @@ router.delete("/:userId", remove);
 router.get("/:userId/favorites", getFavorite);
 router.post("/:userId/favorites", validate(ImageItemSchema), createFavorite);
 router.put(
-  "/:userId/favorites/:favoriteId",
-  validate(UserFavoriteSchema),
+  "/:userId/favorites/:imageId",
+  validate(ImageItemSchema),
   updateFavorite
 );
-router.delete("/:userId/favorites/:favoriteId", removeFavorite);
+router.delete("/:userId/favorites/:imageId", removeFavorite);
 
 export default router;

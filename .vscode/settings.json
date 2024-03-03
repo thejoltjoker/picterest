@@ -1,4 +1,8 @@
 {
   "workbench.editor.openSideBySideDirection": "down",
-  "cmake.configureOnOpen": true
+  "todo-tree.tree.showBadges": true,
+  "markdownlint.config": {
+    "MD026":false,
+    "MD033":false
+  }
 }

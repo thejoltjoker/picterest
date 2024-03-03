@@ -1,7 +1,5 @@
 import axios from "axios";
 import "dotenv/config";
-import { promises as fs } from "fs";
-import path from "path";
 import { SocksProxyAgent } from "socks-proxy-agent";
 import { SearchResult } from "../models/SearchResult";
 
@@ -33,20 +31,20 @@ export const search = async (
     url.searchParams.append("num", num);
     url.searchParams.append("q", query);
 
-    // TODO Remove proxy before publishing
-    if (process.env.NODE_ENV == "production") {
-      const response = await axios.get<SearchResult>(url.toString(), {
-        httpAgent: proxyAgent,
-        httpsAgent: proxyAgent,
-      });
-      return response.data;
-    } else {
-      const data = await fs.readFile(
-        path.resolve(__dirname, "./mockResult.json"),
-        "utf-8"
-      );
-      return JSON.parse(data);
-    }
+    // // TODO Remove proxy before publishing
+    // if (process.env.NODE_ENV == "production") {
+    const response = await axios.get<SearchResult>(url.toString(), {
+      httpAgent: proxyAgent,
+      httpsAgent: proxyAgent,
+    });
+    return response.data;
+    // } else {
+    //   const data = await fs.readFile(
+    //     path.resolve(__dirname, "./mockResult.json"),
+    //     "utf-8"
+    //   );
+    //   return JSON.parse(data);
+    // }
   } catch (error) {
     console.error("Error while performing search", error);
     throw error;

@@ -9,6 +9,7 @@ export const ImageItemSchema = Joi.object({
   thumbnailLink: Joi.string().uri(),
   thumbnailWidth: Joi.number(),
   thumbnailHeight: Joi.number(),
+  imageId: Joi.string().length(40).required(),
 });
 
 export const ImageSchemaSwagger = j2s(ImageItemSchema).swagger;
