@@ -4,7 +4,7 @@ import ImageGrid from "../components/ImageGrid";
 import SearchBar from "../components/SearchBar";
 import { ImageItem } from "../models/ImageItem";
 import { SearchResult } from "../models/SearchResult";
-
+// TODO add load more button
 const SearchPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);

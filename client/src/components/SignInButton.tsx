@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { FaRightToBracket } from "react-icons/fa6";
+import Button from "./Button";
 
-const SidebarSignIn = () => {
+const SignInButton = () => {
   const { loginWithRedirect } = useAuth0();
 
   const handleLogin = async () => {
@@ -12,14 +12,6 @@ const SidebarSignIn = () => {
     });
   };
 
-  return (
-    <button
-      className="group flex items-center rounded-lg p-2 text-stone-900 hover:bg-stone-100"
-      onClick={handleLogin}
-    >
-      <FaRightToBracket className="text-xl" />
-      <span className="ms-3 flex-1 whitespace-nowrap">Sign in</span>
-    </button>
-  );
+  return <Button onClick={handleLogin}>Sign in</Button>;
 };
-export default SidebarSignIn;
+export default SignInButton;

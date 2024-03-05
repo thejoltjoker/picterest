@@ -67,37 +67,43 @@ const Sidebar = () => {
                 </span>
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/saved"
-                className={({ isActive }) =>
-                  isActive ? "text-theme-900" : "text-stone-500"
-                }
-              >
-                <span className="group flex items-center rounded-lg p-2  hover:bg-stone-100">
-                  <FaHeart className="text-xl" />
+            {isAuthenticated && (
+              <li>
+                <NavLink
+                  to="/saved"
+                  className={({ isActive }) =>
+                    isActive ? "text-theme-900" : "text-stone-500"
+                  }
+                >
+                  <span className="group flex items-center rounded-lg p-2  hover:bg-stone-100">
+                    <FaHeart className="text-xl" />
 
-                  <span className="ms-3 flex-1 whitespace-nowrap">Saved</span>
-                  <span className="bg-theme-100/50 text-theme-900 ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full p-3 text-sm font-medium">
-                    {favorites.length}
+                    <span className="ms-3 flex-1 whitespace-nowrap">Saved</span>
+                    <span className="bg-theme-100/50 text-theme-900 ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full p-3 text-sm font-medium">
+                      {favorites.length}
+                    </span>
                   </span>
-                </span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/profile"
-                className={({ isActive }) =>
-                  isActive ? "text-theme-900" : "text-stone-500"
-                }
-              >
-                <span className="group flex items-center rounded-lg p-2  hover:bg-stone-100">
-                  <FaUser className="text-xl" />
+                </NavLink>
+              </li>
+            )}
+            {isAuthenticated && (
+              <li>
+                <NavLink
+                  to="/profile"
+                  className={({ isActive }) =>
+                    isActive ? "text-theme-900" : "text-stone-500"
+                  }
+                >
+                  <span className="group flex items-center rounded-lg p-2  hover:bg-stone-100">
+                    <FaUser className="text-xl" />
 
-                  <span className="ms-3 flex-1 whitespace-nowrap">Profile</span>
-                </span>
-              </NavLink>
-            </li>
+                    <span className="ms-3 flex-1 whitespace-nowrap">
+                      Profile
+                    </span>
+                  </span>
+                </NavLink>
+              </li>
+            )}
             <li>
               <hr className="mx-4 my-4 border-stone-200" />
             </li>
