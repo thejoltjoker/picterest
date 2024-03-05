@@ -4,6 +4,11 @@
 @tailwind utilities;
 
 @layer base {
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
   html {
     @apply bg-stone-100;
   }
@@ -31,7 +36,7 @@
 
   .slide-up {
     animation-duration: 0.5s;
-    transition-delay: calc(var(--i) * 100ms);
+    /* transition-delay: calc(var(--i) * 100ms); */
     animation-name: slideUp;
   }
 
