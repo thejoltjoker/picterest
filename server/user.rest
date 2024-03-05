@@ -1,35 +1,26 @@
-GET http://localhost:3000/api/user/1709377116960
+# Existing user
+GET http://localhost:3000/api/user/8eb1b522f60d11fa897de1dc6351b7e8
+###
+# Non-existing user
+GET http://localhost:3000/api/user/123
 ###
 POST http://localhost:3000/api/user
 Content-Type: application/json
 
 {
-  "email": "john.doe@example.com",
+  "userId": "8eb1b522f60d11fa897de1dc6351b7e8",
   "favorites": []
 }
 
 ###
-PUT http://localhost:3000/api/user/1709377116960
+PUT http://localhost:3000/api/user/1
 Content-Type: application/json
 
 {
-  "email": "john.do1@example.com",
+  "userId":"8eb1b522f60d11fa897de1dc6351b111",
   "favorites": []
 }
 
 ###
 DELETE http://localhost:3000/api/user/1
-###
-POST http://localhost:3000/api/user/1/favorites/save
-Content-Type: application/json
-
-{
-  "title": "Example",
-  "description": "Example description",
-  "link": "https://example.com/",
-  "thumbnailUrl": "https://example.com/thumb.jpg",
-  "thumbnailWidth": 123,
-  "thumbnailHeight": 456,
-  "imageUrl": "https://example.com/image.jpg"
-}
 ###

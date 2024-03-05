@@ -37,9 +37,7 @@ export const create = async (
      */
   try {
     const favorite = await createFavorite(req.params.userId, req.body);
-    if (!favorite) {
-      return res.status(404).json({ message: "User not found" });
-    }
+
     res.status(200).json({ favorite: favorite });
   } catch (err) {
     console.error(`Error while creating favorite`, err);

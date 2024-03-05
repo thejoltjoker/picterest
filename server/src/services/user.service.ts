@@ -3,32 +3,43 @@ import { read, write } from "./database";
 
 export const get = async (userId: string): Promise<User | undefined> => {
   const database = await read();
-  return database.users.find((user) => user.userId === userId);
+  return database?.users.find((user) => user.userId === userId);
 };
 
-export const create = async (user: User): Promise<User> => {
+export const create = async (user: User): Promise<User | undefined> => {
   const database = await read();
-  const existingUser = database.users.find((u) => u.email === user.email);
+  const existingUser = database?.users.find((u) => u.userId === user.userId);
   if (existingUser) {
     return existingUser;
   }
-  database.users.push(user);
-  await write(database);
-  return user;
+  database?.users.push(user);
+  if (database) {
+    await write(database);
+    return user;
+  }
 };
 
-export const update = async (user: User): Promise<User | undefined> => {
-  if (!user.userId) return;
+export const update = async (
+  userId: string,
+  user: User
+): Promise<User | undefined> => {
   const database = await read();
-  database.users = database.users.map((u) =>
-    u.userId === user.userId ? user : u
-  );
-  await write(database);
-  return user;
+  if (database) {
+    if (await get(userId)) {
+      database.users = database.users.map((dbUser) =>
+        dbUser.userId === userId ? user : dbUser
+      );
+    } else database.users.push(user);
+
+    await write(database);
+    return user;
+  }
 };
 
 export const remove = async (userId: string) => {
-  const data = await read();
-  data.users = data.users.filter((user) => user.userId != userId);
-  await write(data);
+  const database = await read();
+  if (database) {
+    database.users = database.users.filter((user) => user.userId != userId);
+    await write(database);
+  }
 };

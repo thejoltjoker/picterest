@@ -10,7 +10,8 @@ Content-Type: application/json
   "link": "http://example.com/image.jpg",
   "thumbnailLink": "http://example.com/thumb.jpg",
   "thumbnailWidth": 123,
-  "thumbnailHeight": 456
+  "thumbnailHeight": 456,
+  "imageId":"6163f09ac470dd7d34061aa26f24eaafc263a44b"
 }
 
 ###

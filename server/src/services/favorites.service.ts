@@ -1,21 +1,24 @@
 import { ImageItem } from "../models/ImageItem";
+import { User } from "../models/User";
 import { read } from "./database";
 import { update as updateUser } from "./user.service";
 
-export const get = async (userId: string): Promise<ImageItem[] | undefined> => {
+export const get = async (userId: string): Promise<ImageItem[]> => {
   const database = await read();
-  const user = database.users.find((u) => u.userId === userId);
-  if (!user) return;
+  const user = database?.users.find((u) => u.userId === userId);
+  if (!user) return [];
   return user.favorites;
 };
 
 export const create = async (
   userId: string,
   image: ImageItem
-): Promise<ImageItem | undefined> => {
+): Promise<ImageItem> => {
   const database = await read();
-  const user = database.users.find((u) => u.userId === userId);
-  if (!user) return;
+  let user = database?.users.find((u) => u.userId === userId);
+  if (!user) {
+    user = new User(userId, []);
+  }
 
   const existingFavorite = user.favorites.find(
     (img) => img.imageId === image.imageId
@@ -23,26 +26,28 @@ export const create = async (
   if (existingFavorite) {
     return existingFavorite;
   }
-  const newFavorite = image;
-  user.favorites.push(newFavorite);
-  await updateUser(user);
+  user.favorites.push(image);
+  console.log(user);
+  await updateUser(userId, user);
 
-  return newFavorite;
+  return image;
 };
 
 export const update = async (
   userId: string,
   favorite: ImageItem
-): Promise<ImageItem | undefined> => {
+): Promise<ImageItem> => {
   const database = await read();
-  const user = database.users.find((u) => u.userId === userId);
-  if (!user) return;
+  let user = database?.users.find((u) => u.userId === userId);
+  if (!user) {
+    user = new User(userId, []);
+  }
 
   user.favorites = user.favorites.map((img) =>
     img.link === favorite.link ? favorite : img
   );
 
-  await updateUser(user);
+  await updateUser(userId, user);
 
   return favorite;
 };
@@ -52,11 +57,11 @@ export const remove = async (
   imageId: string
 ): Promise<boolean | undefined> => {
   const database = await read();
-  const user = database.users.find((u) => u.userId === userId);
+  const user = database?.users.find((u) => u.userId === userId);
   if (!user) return;
 
   user.favorites = user.favorites.filter((img) => img.imageId != imageId);
 
-  await updateUser(user);
+  await updateUser(userId, user);
   return true;
 };

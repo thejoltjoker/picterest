@@ -13,7 +13,7 @@ export const get = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = await getUser(req.params.userId);
     if (!user) {
-      return res.status(404).json({});
+      return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
   } catch (error) {
@@ -29,7 +29,7 @@ export const create = async (
 ) => {
   try {
     const user = await createUser(
-      new User(req.body.email, req.body.favorites, Date.now().toString())
+      new User(req.body.userId, req.body.favorites)
     );
     if (!user) {
       return res.status(404).json({});
@@ -47,9 +47,9 @@ export const update = async (
   next: NextFunction
 ) => {
   try {
-    const user = await updateUser({ ...req.body, userId: req.params.userId });
+    const user = await updateUser(req.params.userId, { ...req.body });
     if (!user) {
-      return res.status(404).json({});
+      return res.status(404).json({ message: "Couldn't find user" });
     }
     res.status(200).json(user);
   } catch (err) {

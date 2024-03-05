@@ -63,7 +63,7 @@ Visit `http://localhost:3000/api/docs` in your browser to access the api documen
   
 ### User
 
-- `GET /api/user`: Get a user from the database.
+- `GET /api/user/{userId}`: Get a user from the database.
 - `POST /api/user`: Create a user in the database.
 - `PUT /api/user/{userId}`: Update a user in the database.
 - `DELETE /api/user/{userId}`: Delete a user from the database.

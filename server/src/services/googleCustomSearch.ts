@@ -31,12 +31,15 @@ export const search = async (
     url.searchParams.append("num", num);
     url.searchParams.append("q", query);
 
-    // // TODO Remove proxy before publishing
+    // TODO Remove proxy before publishing
     // if (process.env.NODE_ENV == "production") {
-    const response = await axios.get<SearchResult>(url.toString(), {
-      httpAgent: proxyAgent,
-      httpsAgent: proxyAgent,
-    });
+    const response = await axios.get<SearchResult>(
+      url.toString()
+      // , {
+      //   httpAgent: proxyAgent,
+      //   httpsAgent: proxyAgent,
+      // }
+    );
     return response.data;
     // } else {
     //   const data = await fs.readFile(
