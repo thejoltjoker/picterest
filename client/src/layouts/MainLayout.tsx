@@ -1,16 +1,17 @@
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect, useReducer } from "react";
 import { Outlet } from "react-router-dom";
+import { Md5 } from "ts-md5";
 import Navbar from "../components/Navbar";
 import { FavoritesContext } from "../contexts/FavoritesContext";
-
-import { Auth0Provider } from "@auth0/auth0-react";
-import { useEffect, useReducer } from "react";
 import {
   FavoritesActionType,
   FavoritesReducer,
 } from "../reducers/FavoritesReducer";
-import { getFavorites } from "../services/user.service";
+import { getFavorites } from "../services/favorites.service";
 
 const MainLayout = () => {
+  const { user, isAuthenticated } = useAuth0();
   const initialState = [
     {
       imageId: "initial",
@@ -27,10 +28,14 @@ const MainLayout = () => {
 
   useEffect(() => {
     let ignore = false;
-    if (favorites.length == 1 && favorites[0].imageId === "initial") {
+    if (
+      favorites.length == 1 &&
+      favorites[0].imageId === "initial" &&
+      isAuthenticated
+    ) {
       const fetchUser = async () => {
         try {
-          const userId = "1";
+          const userId = user?.email ? Md5.hashStr(user?.email) : "";
 
           const response = await getFavorites(userId);
           if (response && !ignore) {
@@ -52,20 +57,12 @@ const MainLayout = () => {
     };
   });
   return (
-    <div>
-      <Auth0Provider
-        domain={import.meta.env.VITE_AUTH0_DOMAIN}
-        clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
-        authorizationParams={{
-          redirect_uri: window.location.origin,
-        }}
-      >
-        <FavoritesContext.Provider value={{ favorites, dispatch }}>
-          <Navbar />
-          <Outlet />
-        </FavoritesContext.Provider>
-      </Auth0Provider>
-    </div>
+    <main>
+      <FavoritesContext.Provider value={{ favorites, dispatch }}>
+        <Navbar />
+        <Outlet />
+      </FavoritesContext.Provider>
+    </main>
   );
 };
 

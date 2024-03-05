@@ -1,7 +1,7 @@
 import { ImageItem } from "./ImageItem";
 
 export interface User {
-  userId?: string;
+  userId: string;
   email: string;
   favorites: ImageItem[];
 }

@@ -134,3 +134,4 @@ server/exampleResponse.json
 server/fest.js
 server/db.json
 server/src/services/mockResult.json
+sandbox.js

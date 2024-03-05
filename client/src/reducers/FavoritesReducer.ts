@@ -3,6 +3,7 @@ import { ImageItem } from "../models/ImageItem";
 export enum FavoritesActionType {
   Set,
   Add,
+  Remove,
 }
 
 export interface FavoritesAction {
@@ -20,6 +21,10 @@ export const FavoritesReducer = (
     }
     case FavoritesActionType.Add: {
       return [...favorites, ...action.payload];
+    }
+    case FavoritesActionType.Remove: {
+      const idsToRemove = action.payload.map((img) => img.imageId);
+      return favorites.filter((img) => !idsToRemove.includes(img.imageId));
     }
   }
   throw new Error("Unknown action: " + action.type);

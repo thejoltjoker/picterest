@@ -1,15 +1,17 @@
+import { useAuth0 } from "@auth0/auth0-react";
+import { Md5 } from "ts-md5";
 import { useFavoritesContext } from "../contexts/FavoritesContext";
 import { ImageItem } from "../models/ImageItem";
 import { FavoritesActionType } from "../reducers/FavoritesReducer";
-import { createFavorite } from "../services/user.service";
-
+import { createFavorite, removeFavorite } from "../services/favorites.service";
 type Props = { image: ImageItem };
 
 const SaveImage = ({ image }: Props) => {
+  const { user } = useAuth0();
   const { favorites, dispatch } = useFavoritesContext();
 
-  // TODO Dynamically get userId
-  const userId = "1";
+  const userId = user?.email ? Md5.hashStr(user.email) : "0";
+
   const handleSave = async () => {
     try {
       await createFavorite(userId, image);
@@ -21,6 +23,24 @@ const SaveImage = ({ image }: Props) => {
       console.error("Error when saving image to favorites");
     }
   };
+  
+  const handleRemove = async () => {
+    try {
+      await removeFavorite(userId, image.imageId);
+      dispatch({
+        type: FavoritesActionType.Remove,
+        payload: [image],
+      });
+    } catch (error) {
+      console.error("Error when remove image from favorites");
+    }
+  };
+
+  const handleClick = async () => {
+    favorites.find((img) => img.imageId === image.imageId)
+      ? handleRemove()
+      : handleSave();
+  };
 
   return (
     <button
@@ -29,7 +49,7 @@ const SaveImage = ({ image }: Props) => {
           ? "rounded-full bg-blue-500 p-1 text-white transition"
           : "rounded-full p-1 text-white transition group-hover:bg-blue-500"
       }
-      onClick={handleSave}
+      onClick={handleClick}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

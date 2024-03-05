@@ -17,7 +17,7 @@ describe("crud functions", () => {
 
       const result = await get<string>(url);
 
-      expect(result).toEqual(mockData);
+      expect(result.data).toEqual(mockData);
       expect(axios.get).toHaveBeenCalledWith(url, {
         headers: { Accept: "application/json" },
       });

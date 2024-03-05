@@ -1,5 +1,7 @@
+import { useAuth0 } from "@auth0/auth0-react";
+
 function ProfilePage() {
-  // const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user } = useAuth0();
 
   // if (isLoading) {
   //   return <div>Loading ...</div>;
@@ -14,7 +16,7 @@ function ProfilePage() {
   //     </div>
   //   )
   // );
-  return <></>;
+  return <>{JSON.stringify(user, null, 2)}</>;
 }
 
 export default ProfilePage;

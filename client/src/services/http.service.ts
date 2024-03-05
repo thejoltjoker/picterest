@@ -17,7 +17,7 @@ export const get = async <T>(url: string) => {
   };
   try {
     const response = await axios.get<T>(url, { headers: headers });
-    return response.data;
+    return response;
   } catch (error) {
     handleError("GET", url, error);
     throw error;
@@ -31,7 +31,7 @@ export const post = async <T>(url: string, body: string) => {
   };
   try {
     const response = await axios.post<T>(url, body, { headers: headers });
-    return response.data;
+    return response;
   } catch (error) {
     handleError("POST", url, error);
     throw error;
@@ -45,7 +45,7 @@ export const put = async <T>(url: string, body: string) => {
   };
   try {
     const response = await axios.put<T>(url, body, { headers: headers });
-    return response.data;
+    return response;
   } catch (error) {
     handleError("PUT", url, error);
     throw error;
@@ -58,7 +58,7 @@ export const remove = async <T>(url: string) => {
   };
   try {
     const response = await axios.delete<T>(url, { headers: headers });
-    return response.data;
+    return response;
   } catch (error) {
     handleError("DELETE", url, error);
     throw error;
