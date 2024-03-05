@@ -3,6 +3,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    @apply bg-stone-100;
+  }
+}
+
 @layer utilities {
   .image-title {
     -webkit-mask-image: -webkit-gradient(
@@ -21,5 +27,21 @@
       to(transparent)
     );
     mask-image: linear-gradient(to right, black 50%, transparent 90%);
+  }
+
+  .slide-up {
+    animation-duration: 0.5s;
+    transition-delay: calc(var(--i) * 100ms);
+    animation-name: slideUp;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(20%);
+    }
+
+    to {
+      transform: translateY(0%);
+    }
   }
 }

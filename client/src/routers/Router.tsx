@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { AuthenticationGuard } from "../components/AuthenticationGuard";
 import Auth0ProviderLayout from "../layouts/Auth0ProviderLayout";
 import MainLayout from "../layouts/MainLayout";
+import SidebarLayout from "../layouts/SidebarLayout";
 import CallbackPage from "../pages/CallbackPage";
 import HomePage from "../pages/HomePage";
 import ProfilePage from "../pages/ProfilePage";
@@ -14,10 +15,12 @@ export const router = createBrowserRouter([
     element: <Auth0ProviderLayout />,
     children: [
       {
-        path: "/",
         element: <MainLayout />,
+        children: [{ path: "/", index: true, element: <HomePage /> }],
+      },
+      {
+        element: <SidebarLayout />,
         children: [
-          { path: "/", index: true, element: <HomePage /> },
           { path: "/callback", element: <CallbackPage /> },
           {
             path: "/search",

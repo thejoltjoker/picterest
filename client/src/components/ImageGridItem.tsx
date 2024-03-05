@@ -3,15 +3,19 @@ import SaveImage from "./SaveImage";
 // TODO Show placeholder on broken img
 interface ImageGridItemProps {
   image: ImageItem;
+  index: number;
 }
 
-const ImageGridItem = ({ image }: ImageGridItemProps) => {
+const ImageGridItem = ({ image, index }: ImageGridItemProps) => {
   return (
     <div
-      className="group relative mt-4 rounded-2xl bg-slate-200 transition duration-300 first:mt-0 hover:scale-[103%] md:mt-8"
-      style={{
-        aspectRatio: `${image.thumbnailWidth} / ${image.thumbnailHeight}`,
-      }}
+      className="slide-up group relative mt-4 rounded-2xl bg-slate-200 transition duration-300 first:mt-0 hover:scale-[103%] md:mt-8"
+      style={
+        {
+          "--i": index,
+          aspectRatio: `${image.thumbnailWidth} / ${image.thumbnailHeight}`,
+        } as React.CSSProperties
+      }
     >
       <div className="image-title absolute bottom-3 left-3 z-20 w-full overflow-clip whitespace-nowrap text-white opacity-0 transition duration-200 group-hover:opacity-100">
         {image.title}

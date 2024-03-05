@@ -1,7 +1,7 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { NavLink } from "react-router-dom";
 import NavbarSignIn from "./NavbarSignIn";
-import NavbarSignOut from "./NavbarSignOut";
+import SidebarSignOut from "./SidebarSignOut";
 
 const Navbar = () => {
   const { isAuthenticated } = useAuth0();
@@ -26,7 +26,7 @@ const Navbar = () => {
             </NavLink>
           </>
         )}
-        {isAuthenticated ? <NavbarSignOut /> : <NavbarSignIn />}
+        {isAuthenticated ? <SidebarSignOut /> : <NavbarSignIn />}
       </div>
     </nav>
   );
