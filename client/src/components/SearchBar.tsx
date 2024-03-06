@@ -26,15 +26,16 @@ const SearchBar = ({
             handleSearch(query);
           }}
         >
-          <div className="flex gap-4">
-            <div className="relative w-full">
+          <div className="flex flex-wrap justify-center gap-4">
+            <div className="relative grow">
               <input
                 type="text"
-                name=""
-                id=""
+                name="search-query"
+                id="search-query"
+                placeholder="What are you looking for?"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className={`z-0 h-12 w-full grow rounded-full border-2 border-slate-300 ps-12 focus:border-slate-500 focus:outline-none focus:ring-0 focus:ring-offset-0 ${correctedQuery && "mb-12"} md:mb-0`}
+                className={`z-0 h-12 w-full grow rounded-full border-2 border-slate-300 ps-12 focus:border-slate-500 focus:outline-none focus:ring-0 focus:ring-offset-0 ${correctedQuery && "mb-12"} placeholder:text-stone-400 md:mb-0`}
               />
               {correctedQuery && (
                 <div className="bg-theme-200/30 border-theme-200 absolute top-14 flex h-10 w-fit items-center rounded-full border px-4 md:right-1 md:top-1">
@@ -66,6 +67,7 @@ const SearchBar = ({
                 </div>
               )}
             </div>
+
             <Button disabled={query ? false : true}>Search</Button>
           </div>
         </form>
