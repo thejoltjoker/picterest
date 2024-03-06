@@ -11,7 +11,7 @@ interface ImageGridItemProps {
 const ImageGridItem = ({ image, index }: ImageGridItemProps) => {
   return (
     <div
-      className="slide-up group relative mt-4 rounded-2xl bg-slate-200 transition duration-300 first:mt-0 hover:scale-[102%]"
+      className="slide-up group relative mt-4 rounded-2xl bg-slate-200 transition duration-300 first:mt-0 hover:scale-[102%] sm:mt-8"
       style={
         {
           "--i": index,
