@@ -26,7 +26,7 @@ const SearchBar = ({
             handleSearch(query);
           }}
         >
-          <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
             <div className="relative grow">
               <input
                 type="text"
