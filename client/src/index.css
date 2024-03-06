@@ -13,6 +13,9 @@
   html {
     @apply bg-stone-100;
   }
+  ::selection {
+    @apply bg-theme-300/30;
+  }
 }
 
 @layer utilities {

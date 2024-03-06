@@ -1,5 +1,3 @@
-import { GetFavoritesResponse } from "../models/GetFavoritesResponse";
-import { ImageItem } from "../models/ImageItem";
 import { User } from "../models/User";
 import { get, post, put, remove } from "./http.service";
 
@@ -91,4 +89,3 @@ export const removeUser = async (userId: string) => {
     throw error;
   }
 };
-
