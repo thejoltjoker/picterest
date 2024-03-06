@@ -1,10 +1,17 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { FaCameraRetro, FaHeart, FaMagnifyingGlass } from "react-icons/fa6";
+import {
+  FaCameraRetro,
+  FaHeart,
+  FaMagnifyingGlass,
+  FaUser,
+} from "react-icons/fa6";
 import { Link, NavLink } from "react-router-dom";
 import { useFavoritesContext } from "../contexts/FavoritesContext";
+import SidebarSignIn from "./SidebarSignIn";
 import SidebarSignOut from "./SidebarSignOut";
+// TODO add toggle for light/dark theme
 const Sidebar = () => {
-  const { user, logout } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   const { favorites } = useFavoritesContext();
 
   return (
@@ -40,9 +47,10 @@ const Sidebar = () => {
         <div className="flex h-full flex-col gap-4 overflow-y-auto border-r border-stone-200 bg-stone-100 px-3 py-4">
           <ul className="space-y-2 font-medium">
             <li className="mb-8 flex h-12 items-center">
+              {/* TODO Link to homepage if not signed in */}
               <Link to="/search">
                 <span className="group flex items-center rounded-lg p-2 font-heading text-xl  font-bold hover:bg-stone-100">
-                  <FaCameraRetro className="-mt-[1px] text-xl" />{" "}
+                  <FaCameraRetro className="text-theme-400 -mt-[1px] text-xl" />
                   <span className="ms-3">Picterest</span>
                 </span>
               </Link>
@@ -50,12 +58,8 @@ const Sidebar = () => {
             <li>
               <NavLink
                 to="/search"
-                className={({ isActive, isPending }) =>
-                  isPending
-                    ? "text-stone-500"
-                    : isActive
-                      ? "text-theme-900"
-                      : "text-stone-500"
+                className={({ isActive }) =>
+                  isActive ? "text-theme-900" : "text-stone-500"
                 }
               >
                 <span className="group flex items-center rounded-lg p-2  hover:bg-stone-100">
@@ -65,47 +69,63 @@ const Sidebar = () => {
                 </span>
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to="/saved"
-                className={({ isActive, isPending }) =>
-                  isPending
-                    ? "text-stone-500"
-                    : isActive
-                      ? "text-theme-900"
-                      : "text-stone-500"
-                }
-              >
-                <span className="group flex items-center rounded-lg p-2  hover:bg-stone-100">
-                  <FaHeart className="text-xl" />
+            {isAuthenticated && (
+              <li>
+                <NavLink
+                  to="/saved"
+                  className={({ isActive }) =>
+                    isActive ? "text-theme-900" : "text-stone-500"
+                  }
+                >
+                  <span className="group flex items-center rounded-lg p-2  hover:bg-stone-100">
+                    <FaHeart className="text-xl" />
 
-                  <span className="ms-3 flex-1 whitespace-nowrap">Saved</span>
-                  <span className="bg-theme-100/50 text-theme-900 ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full p-3 text-sm font-medium">
-                    {favorites.length}
+                    <span className="ms-3 flex-1 whitespace-nowrap">Saved</span>
+                    <span className="bg-theme-100/50 text-theme-900 ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full p-3 text-sm font-medium">
+                      {favorites.length}
+                    </span>
                   </span>
-                </span>
-              </NavLink>
-            </li>
+                </NavLink>
+              </li>
+            )}
+            {isAuthenticated && (
+              <li>
+                <NavLink
+                  to="/profile"
+                  className={({ isActive }) =>
+                    isActive ? "text-theme-900" : "text-stone-500"
+                  }
+                >
+                  <span className="group flex items-center rounded-lg p-2  hover:bg-stone-100">
+                    <FaUser className="text-xl" />
+
+                    <span className="ms-3 flex-1 whitespace-nowrap">
+                      Profile
+                    </span>
+                  </span>
+                </NavLink>
+              </li>
+            )}
             <li>
               <hr className="mx-4 my-4 border-stone-200" />
             </li>
-            <li>
-              <SidebarSignOut />
-            </li>
+            <li>{isAuthenticated ? <SidebarSignOut /> : <SidebarSignIn />}</li>
           </ul>
-          <div className="flex">
-            <img
-              src={user?.picture}
-              alt=""
-              className="me-2 size-10 rounded-full border border-stone-400"
-            />
-            <div className="flex flex-col justify-center">
-              <p className="text-sm font-bold">
-                {user?.name} {user?.family_name}
-              </p>
-              <p className="text-xs opacity-50">{user?.email}</p>
+          {isAuthenticated && (
+            <div className="flex">
+              <img
+                src={user?.picture}
+                alt=""
+                className="me-2 size-10 rounded-full border border-stone-400"
+              />
+              <div className="flex flex-col justify-center">
+                <p className="text-sm font-bold">
+                  {user?.name} {user?.family_name}
+                </p>
+                <p className="text-xs opacity-50">{user?.email}</p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </aside>
     </>

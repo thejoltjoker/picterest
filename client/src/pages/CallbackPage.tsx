@@ -1,9 +1,5 @@
 const CallbackPage = () => {
-  return (
-    <div>
-      <p>Callback</p>
-    </div>
-  );
+  return <p>Just a second...</p>;
 };
 
 export default CallbackPage;

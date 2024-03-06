@@ -16,7 +16,19 @@ function ProfilePage() {
   //     </div>
   //   )
   // );
-  return <>{JSON.stringify(user, null, 2)}</>;
+  return (
+    <>
+      {user &&
+        Object.keys(user).map((key) => {
+          return (
+            <>
+              <p className="font-bold">{key}</p>
+              <p>{user[key]}</p>
+            </>
+          );
+        })}
+    </>
+  );
 }
 
 export default ProfilePage;
