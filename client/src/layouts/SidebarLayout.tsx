@@ -57,10 +57,10 @@ const SidebarLayout = () => {
     };
   });
   return (
-    <main className="h-full">
+    <main className="min-h-screen">
       <FavoritesContext.Provider value={{ favorites, dispatch }}>
         <Sidebar />
-        <div className="min-h-full p-4 sm:ml-64">
+        <div className="min-h-screen p-4 sm:ml-64">
           <Outlet />
         </div>
       </FavoritesContext.Provider>

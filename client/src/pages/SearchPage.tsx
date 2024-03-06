@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import Button from "../components/Button";
 import ImageGrid from "../components/ImageGrid";
 import SearchBar from "../components/SearchBar";
 import { ImageItem } from "../models/ImageItem";
@@ -10,7 +11,6 @@ const SearchPage = () => {
   const [isError, setIsError] = useState(false);
   const [searchInfo, setSearchInfo] = useState("");
   const [correctedQuery, setCorrectedQuery] = useState("");
-  const [query, setQuery] = useState("");
   const [images, setImages] = useState<ImageItem[]>();
   const formatter = Intl.NumberFormat("en", { notation: "compact" });
 
@@ -24,6 +24,7 @@ const SearchPage = () => {
       );
 
       const response = await axios.get<SearchResult>(url.toString());
+      console.log(response);
       if (response.data) setImages(response.data.items);
       setIsLoading(false);
       setSearchInfo(
@@ -42,18 +43,19 @@ const SearchPage = () => {
   return (
     <>
       <div className={images ? undefined : "mx-auto mt-[40vh] max-w-screen-md"}>
-        {!images && <p className="mb-2 ps-4 text-xl">Search for something</p>}
         <SearchBar
           handleSearch={handleSearch}
           isLoading={isLoading}
           isError={isError}
           correctedQuery={correctedQuery}
         />
+
         {searchInfo && (
-          <div className="ps-2 text-stone-500 lg:ps-4">{searchInfo}</div>
+          <div className="py-2 ps-4 text-stone-500 lg:ps-4">{searchInfo}</div>
         )}
       </div>
       {images && <ImageGrid images={images} />}
+      {images && <Button>Load more</Button>}
     </>
   );
 };

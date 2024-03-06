@@ -9,6 +9,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useFavoritesContext } from "../contexts/FavoritesContext";
 import SidebarSignIn from "./SidebarSignIn";
 import SidebarSignOut from "./SidebarSignOut";
+// TODO add toggle for light/dark theme
 const Sidebar = () => {
   const { user, isAuthenticated } = useAuth0();
   const { favorites } = useFavoritesContext();
@@ -46,6 +47,7 @@ const Sidebar = () => {
         <div className="flex h-full flex-col gap-4 overflow-y-auto border-r border-stone-200 bg-stone-100 px-3 py-4">
           <ul className="space-y-2 font-medium">
             <li className="mb-8 flex h-12 items-center">
+              {/* TODO Link to homepage if not signed in */}
               <Link to="/search">
                 <span className="group flex items-center rounded-lg p-2 font-heading text-xl  font-bold hover:bg-stone-100">
                   <FaCameraRetro className="text-theme-400 -mt-[1px] text-xl" />

@@ -33,13 +33,10 @@ export const search = async (
 
     // TODO Remove proxy before publishing
     // if (process.env.NODE_ENV == "production") {
-    const response = await axios.get<SearchResult>(
-      url.toString()
-      // , {
-      //   httpAgent: proxyAgent,
-      //   httpsAgent: proxyAgent,
-      // }
-    );
+    const response = await axios.get<SearchResult>(url.toString(), {
+      httpAgent: proxyAgent,
+      httpsAgent: proxyAgent,
+    });
     return response.data;
     // } else {
     //   const data = await fs.readFile(

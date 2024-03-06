@@ -10,7 +10,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex h-5/6 flex-col items-center justify-center gap-4 sm:-ml-64">
+    <div className="flex h-5/6 flex-col items-center justify-center gap-4 xl:-ml-64">
       {/* {images && <ImageGrid images={images} />} */}
       <span className="flex rounded-lg p-2 text-center font-heading text-6xl font-bold hover:bg-stone-100">
         <FaCameraRetro className="text-theme-400 -mt-[2px]" />
