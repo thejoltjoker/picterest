@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import Button from "../components/Button";
 import ImageGrid from "../components/ImageGrid";
+import Logotype from "../components/Logotype";
 import SearchBar from "../components/SearchBar";
 import { ImageItem } from "../models/ImageItem";
 import { SearchResult } from "../models/SearchResult";
@@ -18,6 +19,7 @@ const SearchPage = () => {
     setIsError(false);
     setCorrectedQuery("");
     try {
+      // TODO Create service for searching
       setIsLoading(true);
       const url = new URL(
         `http://localhost:3000/api/search/${encodeURIComponent(searchQuery)}`,
@@ -42,7 +44,14 @@ const SearchPage = () => {
 
   return (
     <>
-      <div className={images ? undefined : "mx-auto mt-[40vh] max-w-screen-md"}>
+      <div
+        className={
+          images ? undefined : "mx-auto mt-[10vh] max-w-screen-md sm:mt-[42vh]"
+        }
+      >
+        <div className="mx-auto w-fit pb-16 sm:hidden">
+          <Logotype size="4xl" />
+        </div>
         <SearchBar
           handleSearch={handleSearch}
           isLoading={isLoading}

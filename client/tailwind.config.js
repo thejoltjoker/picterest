@@ -59,5 +59,6 @@ export default {
       },
     },
   },
+  safelist: ["text-4xl"],
   plugins: [require("@tailwindcss/forms"), require("flowbite/plugin")],
 };
