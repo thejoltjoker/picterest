@@ -5,13 +5,15 @@ import {
   FaMagnifyingGlass,
   FaUser,
 } from "react-icons/fa6";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useFavoritesContext } from "../contexts/FavoritesContext";
+import SidebarListItem from "./SidebarListItem";
 import SidebarSignIn from "./SidebarSignIn";
 import SidebarSignOut from "./SidebarSignOut";
-// TODO add toggle for light/dark theme
+import SidebarThemeToggle from "./SidebarThemeToggle";
+
 const Sidebar = () => {
-  const { user, isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   const { favorites } = useFavoritesContext();
 
   return (
@@ -21,7 +23,7 @@ const Sidebar = () => {
         data-drawer-toggle="sidebar"
         aria-controls="sidebar"
         type="button"
-        className="ms-3 mt-2 inline-flex items-center rounded-lg p-2 text-sm text-stone-500 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-stone-200 sm:hidden "
+        className="ms-3 mt-2 inline-flex items-center rounded-lg p-2 text-sm text-stone-500 hover:bg-stone-100 focus:outline-none focus:ring-2 focus:ring-stone-200 hover:dark:bg-zinc-800 sm:hidden "
       >
         <span className="sr-only">Open sidebar</span>
         <svg
@@ -44,74 +46,50 @@ const Sidebar = () => {
         className="fixed left-0 top-0 z-40 h-screen w-64 -translate-x-full transition-transform sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <div className="flex h-full flex-col gap-4 overflow-y-auto border-r border-stone-200 bg-stone-100 px-3 py-4">
+        <div className="flex h-full flex-col gap-4 overflow-y-auto border-r border-stone-200 bg-stone-100 px-3 py-4 dark:border-zinc-800 dark:bg-zinc-900">
           <ul className="space-y-2 font-medium">
             <li className="mb-8 flex h-12 items-center">
-              {/* TODO Link to homepage if not signed in */}
-              <Link to="/search">
-                <span className="group flex items-center rounded-lg p-2 font-heading text-xl  font-bold hover:bg-stone-100">
+              <Link to={isAuthenticated ? "/search" : "/"}>
+                <span className="group flex items-center rounded-lg p-2 font-heading text-xl  font-bold hover:bg-stone-100 dark:text-stone-100 hover:dark:bg-zinc-800">
                   <FaCameraRetro className="text-theme-400 -mt-[1px] text-xl" />
                   <span className="ms-3">Picterest</span>
                 </span>
               </Link>
             </li>
-            <li>
-              <NavLink
-                to="/search"
-                className={({ isActive }) =>
-                  isActive ? "text-theme-900" : "text-stone-500"
+            <SidebarListItem
+              text={"Search"}
+              href={"/search"}
+              icon={<FaMagnifyingGlass />}
+            />
+
+            {isAuthenticated && (
+              <SidebarListItem
+                text={"Saved"}
+                href={"/saved"}
+                icon={<FaHeart />}
+                badge={
+                  <span className="bg-theme-100/50 text-theme-900 dark:bg-theme-400/50 ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full p-3 text-sm font-medium dark:text-stone-100">
+                    {favorites.length}
+                  </span>
                 }
-              >
-                <span className="group flex items-center rounded-lg p-2  hover:bg-stone-100">
-                  <FaMagnifyingGlass className="text-xl" />
-
-                  <span className="ms-3">Search</span>
-                </span>
-              </NavLink>
-            </li>
-            {isAuthenticated && (
-              <li>
-                <NavLink
-                  to="/saved"
-                  className={({ isActive }) =>
-                    isActive ? "text-theme-900" : "text-stone-500"
-                  }
-                >
-                  <span className="group flex items-center rounded-lg p-2  hover:bg-stone-100">
-                    <FaHeart className="text-xl" />
-
-                    <span className="ms-3 flex-1 whitespace-nowrap">Saved</span>
-                    <span className="bg-theme-100/50 text-theme-900 ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full p-3 text-sm font-medium">
-                      {favorites.length}
-                    </span>
-                  </span>
-                </NavLink>
-              </li>
+              />
             )}
             {isAuthenticated && (
-              <li>
-                <NavLink
-                  to="/profile"
-                  className={({ isActive }) =>
-                    isActive ? "text-theme-900" : "text-stone-500"
-                  }
-                >
-                  <span className="group flex items-center rounded-lg p-2  hover:bg-stone-100">
-                    <FaUser className="text-xl" />
-
-                    <span className="ms-3 flex-1 whitespace-nowrap">
-                      Profile
-                    </span>
-                  </span>
-                </NavLink>
-              </li>
+              <SidebarListItem
+                text={"Profile"}
+                href={"/profile"}
+                icon={<FaUser />}
+              />
             )}
             <li>
-              <hr className="mx-4 my-4 border-stone-200" />
+              <hr className="mx-4 my-4 border-stone-200 dark:border-zinc-800" />
+            </li>
+            <li>
+              <SidebarThemeToggle />
             </li>
             <li>{isAuthenticated ? <SidebarSignOut /> : <SidebarSignIn />}</li>
           </ul>
-          {isAuthenticated && (
+          {/* {isAuthenticated && (
             <div className="flex">
               <img
                 src={user?.picture}
@@ -125,7 +103,7 @@ const Sidebar = () => {
                 <p className="text-xs opacity-50">{user?.email}</p>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </aside>
     </>

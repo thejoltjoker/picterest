@@ -22,7 +22,6 @@ const SavedPage = () => {
 
   return (
     <div className="flex">
-      <div className="max-w-1/4 h-full border border-green-400"></div>
       <div className="grow">
         {favorites ? (
           <ImageGrid images={favorites} />
