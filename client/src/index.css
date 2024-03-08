@@ -10,9 +10,6 @@
     @apply h-full min-h-full;
   }
 
-  html {
-    @apply bg-stone-100;
-  }
   ::selection {
     @apply bg-theme-300/30;
   }

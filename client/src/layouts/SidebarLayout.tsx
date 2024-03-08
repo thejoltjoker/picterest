@@ -1,16 +1,19 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Md5 } from "ts-md5";
 import Sidebar from "../components/Sidebar";
 import { FavoritesContext } from "../contexts/FavoritesContext";
+import { ThemeContext } from "../contexts/ThemeContext";
 import {
   FavoritesActionType,
   FavoritesReducer,
 } from "../reducers/FavoritesReducer";
 import { getFavorites } from "../services/favorites.service";
+import { toggleDarkTheme } from "../utils/theme";
 
 const SidebarLayout = () => {
+  const [theme, setTheme] = useState<"light" | "dark">();
   const { user, isAuthenticated } = useAuth0();
   const initialState = [
     {
@@ -25,6 +28,12 @@ const SidebarLayout = () => {
     },
   ];
   const [favorites, dispatch] = useReducer(FavoritesReducer, initialState);
+
+  useEffect(() => {
+    if (theme) return;
+    setTheme(localStorage.theme ?? "light");
+    toggleDarkTheme();
+  }, [theme]);
 
   useEffect(() => {
     let ignore = false;
@@ -57,14 +66,21 @@ const SidebarLayout = () => {
     };
   });
   return (
-    <main className="min-h-screen">
-      <FavoritesContext.Provider value={{ favorites, dispatch }}>
-        <Sidebar />
-        <div className="min-h-screen p-4 sm:ml-64 sm:p-8">
-          <Outlet />
-        </div>
-      </FavoritesContext.Provider>
-    </main>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        setTheme,
+      }}
+    >
+      <main className="min-h-screen">
+        <FavoritesContext.Provider value={{ favorites, dispatch }}>
+          <Sidebar />
+          <div className="min-h-screen p-4 sm:ml-64 sm:p-8">
+            <Outlet />
+          </div>
+        </FavoritesContext.Provider>
+      </main>
+    </ThemeContext.Provider>
   );
 };
 
