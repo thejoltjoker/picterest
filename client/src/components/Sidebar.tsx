@@ -7,16 +7,14 @@ import {
 } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useFavoritesContext } from "../contexts/FavoritesContext";
-import { useThemeContext } from "../contexts/ThemeContext";
 import SidebarListItem from "./SidebarListItem";
 import SidebarSignIn from "./SidebarSignIn";
 import SidebarSignOut from "./SidebarSignOut";
 import SidebarThemeToggle from "./SidebarThemeToggle";
-// TODO add toggle for light/dark theme
+
 const Sidebar = () => {
-  const { user, isAuthenticated } = useAuth0();
+  const { isAuthenticated } = useAuth0();
   const { favorites } = useFavoritesContext();
-  const { theme, setTheme } = useThemeContext();
 
   return (
     <>
