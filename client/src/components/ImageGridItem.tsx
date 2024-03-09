@@ -1,10 +1,10 @@
 import { FaLink } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { ImageItem } from "../models/ImageItem";
+import { Item } from "../models/SearchResult";
 import SaveImage from "./SaveImage";
 // TODO Show placeholder on broken img
 interface ImageGridItemProps {
-  image: ImageItem;
+  image: Item;
   index: number;
 }
 
@@ -15,14 +15,14 @@ const ImageGridItem = ({ image, index }: ImageGridItemProps) => {
       style={
         {
           "--i": index,
-          aspectRatio: `${image.thumbnailWidth} / ${image.thumbnailHeight}`,
+          aspectRatio: `${image.image.thumbnailWidth} / ${image.image.thumbnailWidth}`,
         } as React.CSSProperties
       }
     >
       <div className="absolute left-3 top-3 z-20">
         <SaveImage image={image} />
       </div>
-      <Link to={image.contextLink}>
+      <Link to={image.image.contextLink}>
         <div className="image-title absolute bottom-3 left-3 z-20 w-full overflow-clip whitespace-nowrap text-white opacity-0 transition duration-200 group-hover:opacity-100">
           {image.title}
         </div>
@@ -31,11 +31,11 @@ const ImageGridItem = ({ image, index }: ImageGridItemProps) => {
         </div>
       </Link>
       <img
-        src={image.thumbnailLink}
+        src={image.image.thumbnailLink}
         alt={image.title}
         className="z-10 w-full overflow-hidden rounded-2xl transition duration-300 group-hover:shadow-xl"
         style={{
-          aspectRatio: `${image.thumbnailWidth} / ${image.thumbnailHeight}`,
+          aspectRatio: `${image.image.thumbnailWidth} / ${image.image.thumbnailHeight}`,
         }}
         onMouseOver={(e) => (e.currentTarget.src = image.link)}
       />

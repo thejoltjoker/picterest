@@ -1,23 +1,25 @@
-import { useState } from "react";
 import { FaMagnifyingGlass, FaXmark } from "react-icons/fa6";
 import Button from "../components/Button";
 import SearchErrorIcon from "../components/SearchErrorIcon";
 import SearchLoadingIcon from "../components/SearchLoadingIcon";
 import InputTextField from "./InputTextField";
 interface SearchBarProps {
+  query: string;
   handleSearch: (query: string) => void;
   isLoading: boolean;
   isError: boolean;
   correctedQuery: string;
+  onChange: (value: string) => void;
 }
+
 const SearchBar = ({
+  query,
   handleSearch,
   isLoading,
   isError,
   correctedQuery,
+  onChange,
 }: SearchBarProps) => {
-  const [query, setQuery] = useState("");
-
   return (
     <>
       <div className="">
@@ -43,7 +45,7 @@ const SearchBar = ({
                 id="search-query"
                 placeholder="What are you looking for?"
                 value={query}
-                onChange={(value) => setQuery(value)}
+                onChange={onChange}
                 className={`ps-12 ${correctedQuery && "mb-12"}`}
               />
               {correctedQuery && (

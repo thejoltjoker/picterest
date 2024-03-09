@@ -84,9 +84,9 @@ const Sidebar = () => {
             <li>
               <hr className="mx-4 my-4 border-stone-200 dark:border-zinc-800" />
             </li>
-            <li>
-              <SidebarThemeToggle />
-            </li>
+
+            <SidebarThemeToggle />
+
             <li>{isAuthenticated ? <SidebarSignOut /> : <SidebarSignIn />}</li>
           </ul>
           {/* {isAuthenticated && (
