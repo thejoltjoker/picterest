@@ -10,7 +10,7 @@ function ProfilePage() {
         <img
           src={user?.picture}
           alt=""
-          className="max-w-32 rounded-full bg-none ring-2 ring-stone-300 ring-offset-2 ring-offset-stone-100"
+          className="max-w-32 rounded-full bg-none ring-2 ring-stone-300 ring-offset-2 ring-offset-stone-100 dark:ring-stone-500 dark:ring-offset-stone-900"
         />
       </div>
       <div>
