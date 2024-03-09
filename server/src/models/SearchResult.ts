@@ -21,13 +21,9 @@ export interface Item {
   displayLink: string;
   snippet: string;
   htmlSnippet: string;
-  mime: FileFormat;
-  fileFormat: FileFormat;
+  mime: string;
+  fileFormat: string;
   image: Image;
-}
-
-export enum FileFormat {
-  ImageJPEG = "image/jpeg",
 }
 
 export interface Image {
