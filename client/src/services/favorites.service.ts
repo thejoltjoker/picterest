@@ -34,7 +34,7 @@ export const updateFavorite = async (userId: string, image: ImageItem) => {
   // TODO Add validation
   try {
     const response = await put<ImageItem>(
-      Endpoint.updateFavorite(userId, image.imageId),
+      Endpoint.updateFavorite(userId, image.id),
       JSON.stringify(image),
     );
     return response.data;

@@ -54,7 +54,7 @@ const SearchBar = ({
                     Did you mean{" "}
                     <span
                       onClick={() => {
-                        setQuery(correctedQuery);
+                        onChange(correctedQuery);
                         handleSearch(correctedQuery);
                       }}
                       className="text-theme-300 hover:text-theme-400 cursor-pointer font-bold transition"

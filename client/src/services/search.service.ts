@@ -39,7 +39,8 @@ export const search = async (
       //   httpsAgent: proxyAgent,
       // }
     );
-    return response.data;
+    const data = response.data;
+    return data;
   } catch (error) {
     console.error("Error while performing search", error);
     throw error;

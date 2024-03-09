@@ -1,10 +1,10 @@
 import { FaLink } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { Item } from "../models/SearchResult";
+import { ImageItem } from "../models/ImageItem";
 import SaveImage from "./SaveImage";
 // TODO Show placeholder on broken img
 interface ImageGridItemProps {
-  image: Item;
+  image: ImageItem;
   index: number;
 }
 
@@ -15,7 +15,7 @@ const ImageGridItem = ({ image, index }: ImageGridItemProps) => {
       style={
         {
           "--i": index,
-          aspectRatio: `${image.image.thumbnailWidth} / ${image.image.thumbnailWidth}`,
+          aspectRatio: `${image.image.thumbnailWidth} / ${image.image.thumbnailHeight}`,
         } as React.CSSProperties
       }
     >

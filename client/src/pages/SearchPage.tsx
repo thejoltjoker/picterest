@@ -1,23 +1,25 @@
 import { useState } from "react";
+import { Md5 } from "ts-md5";
 import Button from "../components/Button";
 import ImageGrid from "../components/ImageGrid";
 import Logotype from "../components/Logotype";
 import SearchBar from "../components/SearchBar";
-import { Item } from "../models/SearchResult";
+import { ImageItem } from "../models/ImageItem";
 import { search } from "../services/search.service";
 // TODO add load more button
 const SearchPage = () => {
+  const [query, setQuery] = useState("");
+  const [correctedQuery, setCorrectedQuery] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [searchInfo, setSearchInfo] = useState("");
-  const [correctedQuery, setCorrectedQuery] = useState("");
-  const [images, setImages] = useState<Item[]>([]);
-  const formatter = Intl.NumberFormat("en", { notation: "compact" });
-  const [query, setQuery] = useState("");
+  const [searchInfo, setSearchInfo] = useState<string>();
+  const [images, setImages] = useState<ImageItem[]>([]);
+  const numberFormatter = Intl.NumberFormat("en", { notation: "compact" });
 
   const handleSearch = async (
     searchQuery: string,
-    searchStart?: number = 0,
+    searchStart: number = 0,
+    appendResults: boolean = false,
   ) => {
     setIsError(false);
     setCorrectedQuery("");
@@ -26,11 +28,15 @@ const SearchPage = () => {
       // TODO Move api search to separate branch and use google api in client
       setIsLoading(true);
       const response = await search(searchQuery, searchStart, 10);
-      console.log(response);
-      if (response) setImages([...images, ...response.items]);
+      const imageItems = response.items.map((img): ImageItem => {
+        return { ...img, id: Md5.hashStr(img.link) };
+      });
+      console.log(imageItems);
+      if (response)
+        setImages(appendResults ? [...images, ...imageItems] : [...imageItems]);
       setIsLoading(false);
       setSearchInfo(
-        `Found ${formatter.format(Number(response.searchInformation.totalResults))} results in ${response.searchInformation.formattedSearchTime}s.`,
+        `Found ${numberFormatter.format(Number(response.searchInformation.totalResults))} results in ${response.searchInformation.formattedSearchTime}s.`,
       );
       if (response.spelling)
         setCorrectedQuery(response.spelling.correctedQuery);
@@ -43,14 +49,16 @@ const SearchPage = () => {
   };
 
   const handleLoadMore = () => {
-    handleSearch(query, images.length);
+    handleSearch(query, images.length + 1, true);
   };
 
   return (
     <>
       <div
         className={
-          images ? undefined : "mx-auto mt-[10vh] max-w-screen-md sm:mt-[42vh]"
+          searchInfo
+            ? undefined
+            : "mx-auto mt-[10vh] max-w-screen-md sm:mt-[42vh]"
         }
       >
         <div className="mx-auto w-fit pb-16 sm:hidden">
@@ -69,8 +77,14 @@ const SearchPage = () => {
           <div className="py-2 ps-4 text-stone-500 lg:ps-4">{searchInfo}</div>
         )}
       </div>
-      {images && <ImageGrid images={images} />}
-      {images && <Button onClick={handleLoadMore}>Load more</Button>}
+      {searchInfo && <ImageGrid images={images} />}
+      {searchInfo && (
+        <div className="flex w-full justify-center pt-4 sm:pt-8">
+          <Button onClick={handleLoadMore} disabled={isLoading}>
+            {isLoading ? "Loading..." : "Load more"}
+          </Button>
+        </div>
+      )}
     </>
   );
 };

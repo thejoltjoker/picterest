@@ -27,7 +27,7 @@ const SaveImage = ({ image }: Props) => {
 
   const handleRemove = async () => {
     try {
-      await removeFavorite(userId, image.imageId);
+      await removeFavorite(userId, image.id);
       dispatch({
         type: FavoritesActionType.Remove,
         payload: [image],
@@ -38,7 +38,7 @@ const SaveImage = ({ image }: Props) => {
   };
 
   const handleClick = async () => {
-    favorites.find((img) => img.imageId === image.imageId)
+    favorites.find((img) => img.id === image.id)
       ? handleRemove()
       : handleSave();
   };
@@ -46,7 +46,7 @@ const SaveImage = ({ image }: Props) => {
   return (
     <button
       className={
-        favorites.find((img) => img.imageId === image.imageId)
+        favorites.find((img) => img.id === image.id)
           ? "bg-theme-400 border-theme-600 rounded-full border p-2 text-white transition"
           : "group-hover:bg-theme-100 group-hover:border-theme-200 rounded-full border border-transparent p-2 text-white transition"
       }

@@ -1,7 +1,7 @@
-import { Item } from "../models/SearchResult";
+import { ImageItem } from "../models/ImageItem";
 import ImageGridItem from "./ImageGridItem";
 
-type Props = { images: Item[] };
+type Props = { images: ImageItem[] };
 
 const ImageGrid = ({ images: results }: Props) => {
   return (
