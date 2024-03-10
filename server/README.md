@@ -74,7 +74,6 @@ Visit `http://localhost:3000/api/docs` in your browser to access the api documen
 - `POST /api/user/{userId}/favorites`: Create a new favorite for user.
 - `PUT /api/user/{userId}/favorites/{favoriteId}`: Update a favorite for user.
 - `DELETE /api/user/{userId}/favorites/{favoriteId}`: Delete a favorite for user.
-<!-- TODO Add the rest of the endpoints -->
 
 ## License
 

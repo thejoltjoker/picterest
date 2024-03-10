@@ -1,34 +1,56 @@
-GET http://localhost:3000/api/user/1709377116960/favorites
+GET http://localhost:3000/api/user/1/favorites
 ###
-POST http://localhost:3000/api/user/1709377116960/favorites
+POST http://localhost:3000/api/user/1/favorites
 Content-Type: application/json
 
 {
-  "title": "Example title",
-  "snippet": "Example snippet",
-  "contextLink": "http://example.com",
-  "link": "http://example.com/image.jpg",
-  "thumbnailLink": "http://example.com/thumb.jpg",
-  "thumbnailWidth": 123,
-  "thumbnailHeight": 456,
-  "imageId":"6163f09ac470dd7d34061aa26f24eaafc263a44b"
+  "kind": "customsearch#result",
+  "title": "750+ Cute Cat Pictures | Download Free Images on Unsplash",
+  "htmlTitle": "750+ Cute <b>Cat</b> Pictures | Download Free Images on Unsplash",
+  "link": "https://plus.unsplash.com/premium_photo-1677101410309-6eaf07d67271?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y3V0ZSUyMGNhdHxlbnwwfHwwfHx8MA%3D%3D",
+  "displayLink": "unsplash.com",
+  "snippet": "750+ Cute Cat Pictures | Download Free Images on Unsplash",
+  "htmlSnippet": "750+ Cute <b>Cat</b> Pictures | Download Free Images on Unsplash",
+  "mime": "image/",
+  "fileFormat": "image/",
+  "image": {
+    "contextLink": "https://unsplash.com/s/photos/cute-cat",
+    "height": 1500,
+    "width": 1000,
+    "byteSize": 176353,
+    "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvVK5ZD5s93goyHVvFudk0ZFzv-zr4g8y4oMNCuy-NHjOAa2rC8bnGp_g&s",
+    "thumbnailHeight": 150,
+    "thumbnailWidth": 100
+  },
+  "id": "7fa0165006d17586e313dc44be2593f3"
 }
+
 
 ###
 PUT http://localhost:3000/api/user/1709377116960/favorites/6163f09ac470dd7d34061aa26f24eaafc263a44b
 Content-Type: application/json
 
 {
-  "title": "Example title - updated",
-  "snippet": "Example snippet",
-  "contextLink": "http://example.com",
-  "link": "http://example.com/image.jpg",
-  "thumbnailLink": "http://example.com/thumb.jpg",
-  "thumbnailWidth": 123,
-  "thumbnailHeight": 456,
-  "imageId":"6163f09ac470dd7d34061aa26f24eaafc263a44b"
+  "kind": "customsearch#result",
+  "title": "Cat",
+  "link": "https://plus.unsplash.com/premium_photo-1677101410309-6eaf07d67271?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y3V0ZSUyMGNhdHxlbnwwfHwwfHx8MA%3D%3D",
+  "displayLink": "unsplash.com",
+  "snippet": "750+ Cute Cat Pictures | Download Free Images on Unsplash",
+  "htmlSnippet": "750+ Cute <b>Cat</b> Pictures | Download Free Images on Unsplash",
+  "mime": "image/",
+  "fileFormat": "image/",
+  "image": {
+    "contextLink": "https://unsplash.com/s/photos/cute-cat",
+    "height": 1500,
+    "width": 1000,
+    "byteSize": 176353,
+    "thumbnailLink": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvVK5ZD5s93goyHVvFudk0ZFzv-zr4g8y4oMNCuy-NHjOAa2rC8bnGp_g&s",
+    "thumbnailHeight": 150,
+    "thumbnailWidth": 100
+  },
+  "id": "7fa0165006d17586e313dc44be2593f3"
 }
 
 ###
-DELETE http://localhost:3000/api/user/1709377116960/favorites/2a
+DELETE http://localhost:3000/api/user/1/favorites/7fa0165006d17586e313dc44be2593f1
 ###

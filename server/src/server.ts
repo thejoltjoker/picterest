@@ -13,15 +13,7 @@ const port = process.env.PORT ?? 3000;
 app.use(cors());
 app.use(express.json());
 
-// const jwtCheck = auth({
-//   audience: process.env.AUTH0_API_IDENTIFIER,
-//   issuerBaseURL: `https://${process.env.AUTH0_DOMAIN}`,
-//   tokenSigningAlg: "RS256",
-// });
-
-// // enforce on all endpoints
-// app.use(jwtCheck);
-
+// TODO add swagger docs
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
 app.use("/api", router);
 

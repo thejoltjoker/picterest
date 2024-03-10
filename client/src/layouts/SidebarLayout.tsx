@@ -5,6 +5,7 @@ import { Md5 } from "ts-md5";
 import Sidebar from "../components/Sidebar";
 import { FavoritesContext } from "../contexts/FavoritesContext";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { Kind } from "../models/SearchResult";
 import {
   FavoritesActionType,
   FavoritesReducer,
@@ -17,14 +18,25 @@ const SidebarLayout = () => {
   const { user, isAuthenticated } = useAuth0();
   const initialState = [
     {
-      imageId: "initial",
+      id: "initial",
+      kind: Kind.CustomsearchResult,
       title: "",
-      snippet: "",
-      contextLink: "",
+      htmlTitle: "",
       link: "",
-      thumbnailLink: "",
-      thumbnailWidth: 0,
-      thumbnailHeight: 0,
+      displayLink: "",
+      snippet: "",
+      htmlSnippet: "",
+      mime: "",
+      fileFormat: "",
+      image: {
+        contextLink: "",
+        height: 0,
+        width: 0,
+        byteSize: 0,
+        thumbnailLink: "",
+        thumbnailHeight: 0,
+        thumbnailWidth: 0,
+      },
     },
   ];
   const [favorites, dispatch] = useReducer(FavoritesReducer, initialState);
@@ -39,7 +51,7 @@ const SidebarLayout = () => {
     let ignore = false;
     if (
       favorites.length == 1 &&
-      favorites[0].imageId === "initial" &&
+      favorites[0].id === "initial" &&
       isAuthenticated
     ) {
       const fetchUser = async () => {
