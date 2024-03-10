@@ -103,7 +103,7 @@ Checklist for System Support and Integration 3-Part System - ImageSearch:
 1. [x] Create a JSON file on the server to store a list of users and their favorite images.
 2. [x] Implement a server endpoint to save a favorite image, validating the data using Joi before saving.
 3. [x] Develop a server endpoint that responds with a list of favorite images for a specific user.
-4. [ ] Define the data structure for the JSON file as specified:
+4. [/] Define the data structure for the JSON file as specified:
 
    ```json
    [
