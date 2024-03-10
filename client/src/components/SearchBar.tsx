@@ -1,9 +1,4 @@
-<<<<<<< Updated upstream
-import { FaMagnifyingGlass, FaXmark } from "react-icons/fa6";
-=======
-// TODO Make X on search suggestion work
 import { FaMagnifyingGlass } from "react-icons/fa6";
->>>>>>> Stashed changes
 import Button from "../components/Button";
 import SearchErrorIcon from "../components/SearchErrorIcon";
 import SearchLoadingIcon from "../components/SearchLoadingIcon";
