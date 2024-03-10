@@ -47,8 +47,8 @@ const SaveImage = ({ image }: Props) => {
     <button
       className={
         favorites.find((img) => img.imageId === image.imageId)
-          ? "rounded-full border border-theme-600 bg-theme-400 p-2 text-white transition"
-          : "rounded-full border border-transparent p-2 text-white transition group-hover:border-theme-200 group-hover:bg-theme-100"
+          ? "flex size-8 items-center justify-center rounded-full border border-theme-600 bg-theme-400 text-white transition"
+          : "flex size-8 items-center justify-center rounded-full border border-transparent text-white transition group-hover:border-theme-200 group-hover:bg-theme-100"
       }
       onClick={handleClick}
     >

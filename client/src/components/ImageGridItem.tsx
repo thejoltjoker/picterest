@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { ImageItem } from "../models/ImageItem";
 import SaveImage from "./SaveImage";
 // TODO Show placeholder on broken img
-// TODO add background to link
 interface ImageGridItemProps {
   image: ImageItem;
   index: number;
@@ -12,7 +11,7 @@ interface ImageGridItemProps {
 const ImageGridItem = ({ image, index }: ImageGridItemProps) => {
   return (
     <div
-      className="slide-up group relative mt-4 rounded-2xl border border-stone-300 bg-stone-300 transition duration-300 first:mt-0 hover:scale-[102%] dark:border-stone-700 dark:bg-stone-800 sm:mt-8"
+      className="slide-up group relative mt-4 overflow-hidden rounded-2xl border border-stone-300 bg-stone-300 transition duration-300 first:mt-0 hover:scale-[102%] dark:border-stone-700 dark:bg-stone-800 sm:mt-8"
       style={
         {
           "--i": index,
@@ -23,11 +22,16 @@ const ImageGridItem = ({ image, index }: ImageGridItemProps) => {
       <div className="absolute left-3 top-3 z-20">
         <SaveImage image={image} />
       </div>
-      <Link to={image.contextLink}>
-        <div className="image-title absolute bottom-3 left-3 z-20 w-full overflow-clip whitespace-nowrap text-white opacity-0 transition duration-200 group-hover:opacity-100">
-          {image.title}
+      <Link
+        to={image.contextLink}
+        className="absolute bottom-3 left-3 h-8 w-[calc(100%-1.5rem)] justify-between overflow-hidden rounded-full text-stone-800 transition dark:text-stone-100"
+      >
+        <div className="absolute left-0 top-0 h-8 w-full translate-x-full rounded-full bg-stone-100 opacity-0 transition duration-500 group-hover:translate-x-0 group-hover:opacity-100 dark:bg-zinc-800">
+          <p className="image-title w-full overflow-clip whitespace-nowrap ps-2 pt-1 opacity-0 transition duration-200 group-hover:opacity-100">
+            {image.title}
+          </p>
         </div>
-        <div className="absolute bottom-3 right-3 z-20 text-2xl text-white">
+        <div className="absolute right-0 top-0 flex size-8 items-center justify-center rounded-full bg-stone-100 transition dark:bg-zinc-800">
           <FaLink />
         </div>
       </Link>

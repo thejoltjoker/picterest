@@ -1,8 +1,3 @@
-// export interface ImageItem extends Item {
-//   id: string;
-// }
-
-// TODO implement custom image item
 export class ImageItem {
   constructor(
     public imageId: string,
