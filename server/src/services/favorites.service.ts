@@ -27,7 +27,7 @@ export const create = async (
     return existingFavorite;
   }
   user.favorites.push(image);
-  console.log(user);
+
   await updateUser(userId, user);
 
   return image;

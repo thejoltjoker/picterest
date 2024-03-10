@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+
 import { ImageItem } from "../models/ImageItem";
 import {
   create as createFavorite,
@@ -29,12 +30,6 @@ export const create = async (
   res: Response,
   next: NextFunction
 ) => {
-  /**
-    #swagger.requestBody = {
-        required: true,
-        schema: { $ref: "#/components/schemas/ImageItem" }
-    }
-     */
   try {
     const favorite = await createFavorite(req.params.userId, req.body);
 

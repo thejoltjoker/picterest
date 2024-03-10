@@ -1,9 +1,5 @@
 import axios from "axios";
-
-// import { SocksProxyAgent } from "socks-proxy-agent";
 import { SearchResult } from "../models/SearchResult";
-
-// const proxyAgent = new SocksProxyAgent(import.meta.env.PROXY_URL ?? "");
 
 export const search = async (
   query: string,
@@ -31,15 +27,9 @@ export const search = async (
     url.searchParams.append("num", num.toString());
     url.searchParams.append("q", query);
 
-    // TODO Remove proxy before publishing
-    const response = await axios.get<SearchResult>(
-      url.toString(),
-      // , {
-      //   httpAgent: proxyAgent,
-      //   httpsAgent: proxyAgent,
-      // }
-    );
-    return response.data;
+    const response = await axios.get<SearchResult>(url.toString());
+    const data = response.data;
+    return data;
   } catch (error) {
     console.error("Error while performing search", error);
     throw error;

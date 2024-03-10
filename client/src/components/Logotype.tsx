@@ -7,7 +7,7 @@ type LogotypeProps = {
 const Logotype = ({ size = "6xl" }: LogotypeProps) => {
   return (
     <div
-      className={`flex items-center text-center font-heading font-bold text-${size} dark:text-stone-100`}
+      className={`flex select-none items-center text-center font-heading font-bold text-${size} dark:text-stone-100`}
     >
       <FaCameraRetro className="text-theme-400" />
       <h1 className="ms-3">Picterest</h1>

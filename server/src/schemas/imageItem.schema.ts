@@ -1,16 +1,12 @@
 import Joi from "joi";
-import j2s from "joi-to-swagger";
 
-export const ImageItemSchema = Joi.object({
+export const imageItemSchema = Joi.object({
+  imageId: Joi.string().length(32).required(),
   title: Joi.string().required(),
-  snippet: Joi.string(),
-  contextLink: Joi.string().uri(),
+  snippet: Joi.string().required(),
   link: Joi.string().uri().required(),
-  thumbnailLink: Joi.string().uri(),
-  thumbnailWidth: Joi.number(),
-  thumbnailHeight: Joi.number(),
-  imageId: Joi.string().length(40).required(),
+  contextLink: Joi.string().uri().required(),
+  thumbnailLink: Joi.string().uri().required(),
+  width: Joi.number().integer().positive().required(),
+  height: Joi.number().integer().positive().required(),
 });
-
-export const ImageSchemaSwagger = j2s(ImageItemSchema).swagger;
-export default ImageSchemaSwagger;

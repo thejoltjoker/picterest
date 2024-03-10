@@ -1,12 +1,10 @@
-export class ImageItem {
-  constructor(
-    public imageId: string,
-    public title: string,
-    public snippet: string,
-    public contextLink: string,
-    public link: string,
-    public thumbnailLink: string,
-    public thumbnailWidth: number,
-    public thumbnailHeight: number
-  ) {}
+export interface ImageItem {
+  imageId: string;
+  title: string;
+  snippet: string;
+  link: string;
+  contextLink: string;
+  thumbnailLink: string;
+  width: number;
+  height: number;
 }

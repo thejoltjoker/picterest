@@ -5,6 +5,7 @@ import { Md5 } from "ts-md5";
 import Sidebar from "../components/Sidebar";
 import { FavoritesContext } from "../contexts/FavoritesContext";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { ImageItem } from "../models/ImageItem";
 import {
   FavoritesActionType,
   FavoritesReducer,
@@ -15,18 +16,7 @@ import { toggleDarkTheme } from "../utils/theme";
 const SidebarLayout = () => {
   const [theme, setTheme] = useState<"light" | "dark">();
   const { user, isAuthenticated } = useAuth0();
-  const initialState = [
-    {
-      imageId: "initial",
-      title: "",
-      snippet: "",
-      contextLink: "",
-      link: "",
-      thumbnailLink: "",
-      thumbnailWidth: 0,
-      thumbnailHeight: 0,
-    },
-  ];
+  const initialState = [new ImageItem("initial", "", "", "", "", "", 0, 0)];
   const [favorites, dispatch] = useReducer(FavoritesReducer, initialState);
 
   useEffect(() => {

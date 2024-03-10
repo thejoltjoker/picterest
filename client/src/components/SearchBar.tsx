@@ -37,15 +37,6 @@ const SearchBar = ({
         >
           <div className="flex flex-wrap justify-center gap-4">
             <div className="relative grow">
-              {/* <input
-                type="text"
-                name="search-query"
-                id="search-query"
-                placeholder="What are you looking for?"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                className={`z-0 h-12 w-full grow rounded-full border-2 border-slate-300 ps-12 focus:border-slate-500 focus:outline-none focus:ring-0 focus:ring-offset-0 ${correctedQuery && "mb-12"} placeholder:text-stone-400 md:mb-0`}
-              /> */}
               <InputTextField
                 name="search-query"
                 id="search-query"
@@ -64,18 +55,20 @@ const SearchBar = ({
               )}
               <FaMagnifyingGlass className="absolute left-4 top-4 text-lg dark:text-white" />
               {isLoading && !isError && (
-                <div className="text-theme-100 absolute right-3 top-3">
+                <div className="absolute right-3 top-3 text-theme-100">
                   <SearchLoadingIcon />
                 </div>
               )}
               {!isLoading && isError && (
-                <div className="text-theme-500 absolute right-3 top-3">
+                <div className="absolute right-3 top-3 text-theme-500">
                   <SearchErrorIcon />
                 </div>
               )}
             </div>
 
-            <Button disabled={query ? false : true}>Search</Button>
+            <Button disabled={query && !isLoading ? false : true}>
+              Search
+            </Button>
           </div>
         </form>
       </div>
