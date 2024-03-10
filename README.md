@@ -54,10 +54,6 @@
     ```
 
 ## API Endpoints
-
-### Search
-
-- `GET /api/search`: Search for images.
   
 ### User
 
@@ -90,21 +86,23 @@ This project is licensed under the [MIT License](LICENSE).
 
 Checklist for System Support and Integration 3-Part System - ImageSearch:
 
+[ ] Create scripts to run both server and client
+
 **Klient (Client):**
 
-1. [ ] Implement login functionality with Google or GitHub account using Auth0.
-2. [ ] Enable searching for images with a maximum of 10 results when the user is logged in (Google Custom Search).
-3. [ ] Implement a suggestion feature ("Menade du…") for misspelled search terms, allowing users to click on the corrected term for a new search.
+1. [x] Implement login functionality with Google or GitHub account using Auth0.
+2. [x] Enable searching for images with a maximum of 10 results when the user is logged in (Google Custom Search).
+3. [x] Implement a suggestion feature ("Menade du…") for misspelled search terms, allowing users to click on the corrected term for a new search.
 4. [x] Display the duration of the search process.
-5. [ ] Allow users, when logged in, to save an image to their list of favorite pictures.
-6. [ ] Provide a section on the page where users can view their list of favorite images.
-7. [ ] Ensure that each user has a unique list of favorite images.
+5. [x] Allow users, when logged in, to save an image to their list of favorite pictures.
+6. [x] Provide a section on the page where users can view their list of favorite images.
+7. [x] Ensure that each user has a unique list of favorite images.
 
 **Server:**
 
 1. [x] Create a JSON file on the server to store a list of users and their favorite images.
 2. [x] Implement a server endpoint to save a favorite image, validating the data using Joi before saving.
-3. [ ] Develop a server endpoint that responds with a list of favorite images for a specific user.
+3. [x] Develop a server endpoint that responds with a list of favorite images for a specific user.
 4. [ ] Define the data structure for the JSON file as specified:
 
    ```json
@@ -125,7 +123,7 @@ Checklist for System Support and Integration 3-Part System - ImageSearch:
 **Allmänt (General):**
 
 1. [ ] Submit the task on time.
-2. [ ] Utilize Git and GitHub for version control.
+2. [x] Utilize Git and GitHub for version control.
 3. [ ] Include a Readme with information on how to build the projects.
 4. [ ] Ensure that `node_modules` is not included in the submission.
 

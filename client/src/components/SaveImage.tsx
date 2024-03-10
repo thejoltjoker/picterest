@@ -6,7 +6,7 @@ import { ImageItem } from "../models/ImageItem";
 import { FavoritesActionType } from "../reducers/FavoritesReducer";
 import { createFavorite, removeFavorite } from "../services/favorites.service";
 type Props = { image: ImageItem };
-
+// TODO rename
 const SaveImage = ({ image }: Props) => {
   const { user } = useAuth0();
   const { favorites, dispatch } = useFavoritesContext();
@@ -27,7 +27,7 @@ const SaveImage = ({ image }: Props) => {
 
   const handleRemove = async () => {
     try {
-      await removeFavorite(userId, image.id);
+      await removeFavorite(userId, image.imageId);
       dispatch({
         type: FavoritesActionType.Remove,
         payload: [image],
@@ -38,7 +38,7 @@ const SaveImage = ({ image }: Props) => {
   };
 
   const handleClick = async () => {
-    favorites.find((img) => img.id === image.id)
+    favorites.find((img) => img.imageId === image.imageId)
       ? handleRemove()
       : handleSave();
   };
@@ -46,9 +46,9 @@ const SaveImage = ({ image }: Props) => {
   return (
     <button
       className={
-        favorites.find((img) => img.id === image.id)
-          ? "bg-theme-400 border-theme-600 rounded-full border p-2 text-white transition"
-          : "group-hover:bg-theme-100 group-hover:border-theme-200 rounded-full border border-transparent p-2 text-white transition"
+        favorites.find((img) => img.imageId === image.imageId)
+          ? "flex size-8 items-center justify-center rounded-full border border-theme-600 bg-theme-400 text-white transition"
+          : "flex size-8 items-center justify-center rounded-full border border-transparent text-white transition group-hover:border-theme-200 group-hover:bg-theme-100"
       }
       onClick={handleClick}
     >

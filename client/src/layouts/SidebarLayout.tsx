@@ -5,7 +5,7 @@ import { Md5 } from "ts-md5";
 import Sidebar from "../components/Sidebar";
 import { FavoritesContext } from "../contexts/FavoritesContext";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { Kind } from "../models/SearchResult";
+import { ImageItem } from "../models/ImageItem";
 import {
   FavoritesActionType,
   FavoritesReducer,
@@ -16,29 +16,7 @@ import { toggleDarkTheme } from "../utils/theme";
 const SidebarLayout = () => {
   const [theme, setTheme] = useState<"light" | "dark">();
   const { user, isAuthenticated } = useAuth0();
-  const initialState = [
-    {
-      id: "initial",
-      kind: Kind.CustomsearchResult,
-      title: "",
-      htmlTitle: "",
-      link: "",
-      displayLink: "",
-      snippet: "",
-      htmlSnippet: "",
-      mime: "",
-      fileFormat: "",
-      image: {
-        contextLink: "",
-        height: 0,
-        width: 0,
-        byteSize: 0,
-        thumbnailLink: "",
-        thumbnailHeight: 0,
-        thumbnailWidth: 0,
-      },
-    },
-  ];
+  const initialState = [new ImageItem("initial", "", "", "", "", "", 0, 0)];
   const [favorites, dispatch] = useReducer(FavoritesReducer, initialState);
 
   useEffect(() => {
@@ -51,7 +29,7 @@ const SidebarLayout = () => {
     let ignore = false;
     if (
       favorites.length == 1 &&
-      favorites[0].id === "initial" &&
+      favorites[0].imageId === "initial" &&
       isAuthenticated
     ) {
       const fetchUser = async () => {

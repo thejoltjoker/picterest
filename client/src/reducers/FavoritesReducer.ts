@@ -23,8 +23,8 @@ export const FavoritesReducer = (
       return [...favorites, ...action.payload];
     }
     case FavoritesActionType.Remove: {
-      const idsToRemove = action.payload.map((img) => img.id);
-      return favorites.filter((img) => !idsToRemove.includes(img.id));
+      const idsToRemove = action.payload.map((img) => img.imageId);
+      return favorites.filter((img) => !idsToRemove.includes(img.imageId));
     }
   }
   throw new Error("Unknown action: " + action.type);
