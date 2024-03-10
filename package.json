@@ -1,10 +1,19 @@
 {
-  "name": "react-image-search",
+  "name": "picterest",
   "version": "1.0.0",
   "description": "Full-stack app integrating Google Custom Search and Auth0 for user login, image search, and saving favorites. First assignment of FSU23D Integration course.",
-  "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "concurrently \"npm run start-server\" \"npm run start-client\"",
+    "start-server": "cd server && npm run dev",
+    "start-client": "cd client && npm run dev",
+    "setup": "npm run setup-server && npm run setup-client",
+    "setup-server": "cd server && npm i",
+    "setup-client": "cd client && npm i"
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
 }

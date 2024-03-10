@@ -1,4 +1,3 @@
-<!-- TODO Write documentation -->
 # React Frontend for Image Search
 
 A React application that interfaces with an Express server for Google image searches, user management, and favorite image storage. This project showcases the integration of React with a backend server to create a basic web application.
@@ -7,18 +6,19 @@ A React application that interfaces with an Express server for Google image sear
 
 ### Prerequisites
 
-Before you start, ensure you have the following installed:
+Before you start, ensure you have the following:
 
-- Node.js and npm
+- Node.js and npm installed
 - Google Custom Search JSON API Key
+- Auth0 application
 
 ### Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/thejoltjoker/react-image-search.git
-   cd react-image-search/client
+   git clone https://github.com/thejoltjoker/picterest.git
+   cd picterest/client
    ```
 
 2. Install dependencies:
@@ -31,16 +31,16 @@ Before you start, ensure you have the following installed:
 
    ```env
     VITE_API_SERVER_URL=http://localhost:3000
-    VITE_AUTH0_DOMAIN=dev-xxxxxxxxxxxxxxxx.eu.auth0.com
-    VITE_AUTH0_CLIENT_ID=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    VITE_AUTH0_DOMAIN={your_auth0_domain}
+    VITE_AUTH0_CLIENT_ID={your_auth0_client_id}
     VITE_AUTH0_CALLBACK_URL=http://localhost:5173/callback
-    VITE_GOOGLE_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    VITE_SEARCH_ENGINE_ID=XXXXXXXXXXXXXXXXX
+    VITE_GOOGLE_API_KEY={your_google_api_key}
+    VITE_SEARCH_ENGINE_ID={your_google_search_engine_id}
    ```
 
 ### Running the Frontend
 
-Start the React development server with the following command:
+Start the development server with the following command:
 
 ```bash
 npm run dev

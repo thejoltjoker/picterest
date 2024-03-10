@@ -1,7 +1,7 @@
 <h1 align="center">
-  <img src="client/public/screenshot.png" width=100 height=100 alt="Screenshot">
+  <img src="client/public/picterest_desktop_search_02_light.png" width=960 height=600 alt="Screenshot">
   <br/>
-  React Image Search
+  Picterest
 </h1>
 
 <h4 align="center">Fullstack application integrating Google Custom Search and Auth0</h4>
@@ -21,37 +21,38 @@
 - Display of search results and information about the search duration.
 - Ability to save favorite images to a user-specific list.
 - View a user's unique list of favorite images.
+- Light and dark theme.
 
 ## How To Use
 
 ### Installation
 
-1. Clone the repository from [GitHub](https://github.com/thejoltjoker/react-image-search).
+### Automatic
+
+1. Clone the repository from [GitHub](https://github.com/thejoltjoker/picterest).
 2. Navigate to the project directory.
+3. Follow instructions to setup [client](./client/README.md) and [server](./server/README.md).
+4. Run `npm run setup` from project root directory.
+5. Run `npm start` from project root directory.
+   - Alternatively run `npm run dev` in client and server respectively.
+6. Navigate to http://localhost:5173 in your favorite browser to use the app.
+
+### Manual
+
+1. Clone the repository from [GitHub](https://github.com/thejoltjoker/picterest).
+2. Navigate to the project directory.
+3. Follow instructions to setup [client](./client/README.md) and [server](./server/README.md).
+4. Run `npm run dev` in `server` directory.
+5. Open a new terminal and run `npm run dev` in `client` directory.
+6. Navigate to http://localhost:5173 in your favorite browser to use the app.
 
 #### Client Setup
 
-1. Move to the `client` directory: `cd client`
-1. Install dependencies: `npm install`
-1. Create a `.env` file with Auth0 credentials:
-
-    ```env
-    VITE_AUTH0_DOMAIN=your_auth0_domain
-    VITE_AUTH0_CLIENT_ID=your_auth0_client_id
-    ```
+Follow [client setup instructions in `client/README.md`](./client/README.md)
 
 #### Server Setup
 
-1. Move to the `server` directory: `cd ../server`
-1. Install dependencies: `npm install`
-1. Create a `.env` file with server configuration:
-
-    ```env
-    PORT=3000
-    GOOGLE_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    SEARCH_ENGINE_ID=XXXXXXXXXXXXXXXXX
-    DATABASE_PATH="./image-search-db.json"
-    ```
+Follow [server setup instructions in `server/README.md`](./server/README.md)
 
 ## API Endpoints
   

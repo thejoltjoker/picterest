@@ -9,15 +9,14 @@ Express server that performs Google image searches, stores users and their favor
 Before you begin, make sure you have the following installed:
 
 - Node.js and npm
-- Google Custom Search JSON API Key
 
 ### Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/thejoltjoker/react-image-search.git
-   cd react-image-search/server
+   git clone https://github.com/thejoltjoker/picterest.git
+   cd picterest/server
    ```
 
 2. Install dependencies:
@@ -30,12 +29,8 @@ Before you begin, make sure you have the following installed:
 
    ```env
    PORT=3000
-   GOOGLE_API_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-   SEARCH_ENGINE_ID=XXXXXXXXXXXXXXXXX
-   DATABASE_PATH="./image-search-db.json"
+   DATABASE_PATH="./db.json"
    ```
-
-   Replace `XXXXXXXXX...` with your actual values.
 
 ### Running the Server
 
@@ -49,17 +44,11 @@ Visit `http://localhost:3000/api/docs` in your browser to access the api documen
 
 ## Features
 
-1. **Google Image Search**: Perform image searches using the Google Custom Search JSON API.
+1. **User**: Create and modify users in the JSON database.
 
-2. **User**: Create and modify users in the JSON database.
-
-3. **Save Images**: Save searched images to a user in the JSON database.
+2. **Save Images**: Save searched images to a user in the JSON database.
 
 ## API Endpoints
-
-### Search
-
-- `GET /api/search`: Search for images.
   
 ### User
 
