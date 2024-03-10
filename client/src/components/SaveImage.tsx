@@ -6,7 +6,7 @@ import { ImageItem } from "../models/ImageItem";
 import { FavoritesActionType } from "../reducers/FavoritesReducer";
 import { createFavorite, removeFavorite } from "../services/favorites.service";
 type Props = { image: ImageItem };
-// TODO rename
+
 const SaveImage = ({ image }: Props) => {
   const { user } = useAuth0();
   const { favorites, dispatch } = useFavoritesContext();

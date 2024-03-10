@@ -1,8 +1,9 @@
 import { FaLink } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { ImageItem } from "../models/ImageItem";
+import ImageDisplay from "./ImageDisplay";
 import SaveImage from "./SaveImage";
-// TODO Show placeholder on broken img
+
 interface ImageGridItemProps {
   image: ImageItem;
   index: number;
@@ -11,7 +12,7 @@ interface ImageGridItemProps {
 const ImageGridItem = ({ image, index }: ImageGridItemProps) => {
   return (
     <div
-      className="slide-up group relative mt-4 overflow-hidden rounded-2xl border border-stone-300 bg-stone-300 transition duration-300 first:mt-0 hover:scale-[102%] dark:border-stone-700 dark:bg-stone-800 sm:mt-8"
+      className="slide-up group relative mt-4 overflow-hidden rounded-2xl border border-stone-300 bg-stone-300 transition duration-300 first:mt-0 hover:scale-[102%] dark:border-stone-700 dark:bg-zinc-800 sm:mt-8"
       style={
         {
           "--i": index,
@@ -35,16 +36,8 @@ const ImageGridItem = ({ image, index }: ImageGridItemProps) => {
           <FaLink />
         </div>
       </Link>
-      {/* TODO make image component with broken image display */}
-      <img
-        src={image.thumbnailLink}
-        alt={image.title}
-        className="z-10 w-full overflow-hidden rounded-2xl transition duration-300 group-hover:shadow-xl"
-        style={{
-          aspectRatio: `${image.width} / ${image.height}`,
-        }}
-        onMouseOver={(e) => (e.currentTarget.src = image.link)}
-      />
+
+      <ImageDisplay image={image} />
     </div>
   );
 };
