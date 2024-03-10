@@ -1,8 +1,8 @@
-// TODO Make X on search suggestion work
-import { FaMagnifyingGlass, FaXmark } from "react-icons/fa6";
+import { FaMagnifyingGlass } from "react-icons/fa6";
 import Button from "../components/Button";
 import SearchErrorIcon from "../components/SearchErrorIcon";
 import SearchLoadingIcon from "../components/SearchLoadingIcon";
+import CorrectedQueryDisplay from "./CorrectedQueryDisplay";
 import InputTextField from "./InputTextField";
 interface SearchBarProps {
   query: string;
@@ -40,24 +40,13 @@ const SearchBar = ({
                 onChange={onChange}
                 className={`ps-12 ${correctedQuery && "mb-12"}`}
               />
-              {/* TODO make corrected query component */}
+
               {correctedQuery && (
-                <div className="absolute top-14 flex h-10 w-fit items-center rounded-full border border-theme-200 bg-theme-200/30 px-4 md:right-1 md:top-1">
-                  <p className="italic text-stone-600">
-                    Did you mean{" "}
-                    <span
-                      onClick={() => {
-                        onChange(correctedQuery);
-                        handleSearch(correctedQuery);
-                      }}
-                      className="cursor-pointer font-bold text-theme-300 transition hover:text-theme-400"
-                    >
-                      {correctedQuery}
-                    </span>
-                    ?
-                  </p>
-                  <FaXmark className="-mr-1 ml-2" />
-                </div>
+                <CorrectedQueryDisplay
+                  correctedQuery={correctedQuery}
+                  onChange={onChange}
+                  handleSearch={handleSearch}
+                />
               )}
               <FaMagnifyingGlass className="absolute left-4 top-4 text-lg dark:text-white" />
               {isLoading && !isError && (
