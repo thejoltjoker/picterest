@@ -201,7 +201,6 @@ router.post(
   favoritesController.create
 );
 
-// TODO finish documentation
 /**
  * @openapi
  * /user/{userId}/favorites/{imageId}:

@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="client/public/picterest_desktop_search_02_light.png" width=960 height=600 alt="Screenshot">
+  <img src="client/public/picterest_desktop_search_02_light.png" alt="Screenshot">
   <br/>
   Picterest
 </h1>
@@ -76,8 +76,8 @@ Follow [server setup instructions in `server/README.md`](./server/README.md)
 
 ### You may also like...
 
-- [React Todo App](https://github.com/thejoltjoker/react-todo-app) - A simple todo-list application built with React
 - [SnapCat](https://github.com/thejoltjoker/snapcat) - Mock Social Media for Cats, Powered by React, TypeScript, React Router, Vite, and Tailwind CSS.
+- [React Todo App](https://github.com/thejoltjoker/react-todo-app) - A simple todo-list application built with React
 
 ## License
 
@@ -87,7 +87,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 Checklist for System Support and Integration 3-Part System - ImageSearch:
 
-[ ] Create scripts to run both server and client
+[x] Create scripts to run both server and client
 
 **Klient (Client):**
 
@@ -125,7 +125,7 @@ Checklist for System Support and Integration 3-Part System - ImageSearch:
 
 1. [ ] Submit the task on time.
 2. [x] Utilize Git and GitHub for version control.
-3. [ ] Include a Readme with information on how to build the projects.
+3. [x] Include a Readme with information on how to build the projects.
 4. [ ] Ensure that `node_modules` is not included in the submission.
 
 **Inlämning (Submission):**
@@ -137,5 +137,5 @@ Checklist for System Support and Integration 3-Part System - ImageSearch:
 - [x] Ensure the application is headless with a React frontend and a Node (Express) backend.
 - [x] Implement the feature to suggest corrections for misspelled search terms.
 - [x] Verify that the server endpoint for saving favorite images works seamlessly with the specified data structure.
-- [ ] Consider user authentication and authorization aspects for securing user-specific data.
-- [ ] Test the entire application to ensure all specified functionalities are working as expected.
+- [x] Consider user authentication and authorization aspects for securing user-specific data.
+- [x] Test the entire application to ensure all specified functionalities are working as expected.

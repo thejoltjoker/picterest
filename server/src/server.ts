@@ -14,8 +14,7 @@ const port = process.env.PORT ?? 3000;
 app.use(cors());
 app.use(express.json());
 
-// TODO add swagger docs
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api", router);
 
 app.use((req, res) => {

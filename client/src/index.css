@@ -53,4 +53,8 @@
       transform: translateY(0%);
     }
   }
+
+  [drawer-backdrop] {
+    @apply !bg-zinc-800/50 dark:!bg-zinc-950/80;
+  }
 }

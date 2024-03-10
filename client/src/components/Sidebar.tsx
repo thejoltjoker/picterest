@@ -11,7 +11,7 @@ import SidebarListItem from "./SidebarListItem";
 import SidebarSignIn from "./SidebarSignIn";
 import SidebarSignOut from "./SidebarSignOut";
 import SidebarThemeToggle from "./SidebarThemeToggle";
-// TODO Change drawer color
+
 const Sidebar = () => {
   const { isAuthenticated } = useAuth0();
   const { favorites } = useFavoritesContext();
