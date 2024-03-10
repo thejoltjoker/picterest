@@ -6,7 +6,7 @@ export interface SearchResult {
   searchInformation: SearchInformation;
   promotions?: object[];
   spelling?: Spelling;
-  items: Item[];
+  items?: Item[];
 }
 
 export interface Context {

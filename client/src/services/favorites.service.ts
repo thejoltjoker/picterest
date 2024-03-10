@@ -1,5 +1,7 @@
 import { GetFavoritesResponse } from "../models/GetFavoritesResponse";
 import { ImageItem } from "../models/ImageItem";
+import { imageItemSchema } from "../schemas/imageItem.schema";
+import { isValid } from "../utils/validation";
 import { get, post, put, remove } from "./http.service";
 import { Endpoint } from "./user.service";
 
@@ -17,8 +19,9 @@ export const getFavorites = async (userId: string): Promise<ImageItem[]> => {
 };
 
 export const createFavorite = async (userId: string, image: ImageItem) => {
-  // TODO Add validation
   try {
+    if (!isValid(image, imageItemSchema)) throw new Error("Invalid data");
+
     const response = await post<ImageItem>(
       Endpoint.createFavorite(userId),
       JSON.stringify(image),
@@ -31,8 +34,9 @@ export const createFavorite = async (userId: string, image: ImageItem) => {
 };
 
 export const updateFavorite = async (userId: string, image: ImageItem) => {
-  // TODO Add validation
   try {
+    if (!isValid(image, imageItemSchema)) throw new Error("Invalid data");
+
     const response = await put<ImageItem>(
       Endpoint.updateFavorite(userId, image.imageId),
       JSON.stringify(image),

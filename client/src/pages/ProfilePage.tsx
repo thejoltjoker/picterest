@@ -6,11 +6,11 @@ function ProfilePage() {
 
   return (
     <div className="mx-auto flex max-w-md flex-col gap-4">
-      <div className="flex justify-center">
+      <div className="mx-auto flex size-32 justify-center object-cover">
         <img
           src={user?.picture}
           alt=""
-          className="max-w-32 rounded-full bg-none ring-2 ring-stone-300 ring-offset-2 ring-offset-stone-100 dark:ring-stone-500 dark:ring-offset-stone-900"
+          className="w-full rounded-full bg-none object-cover ring-2 ring-stone-300 ring-offset-2 ring-offset-stone-100 dark:ring-stone-500 dark:ring-offset-stone-900"
         />
       </div>
       <div>

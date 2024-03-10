@@ -1,4 +1,6 @@
 import { User } from "../models/User";
+import { userSchema } from "../schemas/user.schema";
+import { isValid } from "../utils/validation";
 import { get, post, put, remove } from "./http.service";
 
 export class Endpoint {
@@ -51,8 +53,9 @@ export const getUser = async (userId: string): Promise<User> => {
 };
 
 export const createUser = async (user: User): Promise<User> => {
-  // TODO Add validation
   try {
+    if (!isValid(user, userSchema)) throw new Error("Invalid data");
+
     const response = await post<User>(
       Endpoint.createUser,
       JSON.stringify(user),
@@ -65,9 +68,8 @@ export const createUser = async (user: User): Promise<User> => {
 };
 
 export const updateUser = async (user: User): Promise<User> => {
-  // TODO Add validation
   try {
-    if (!user.userId) throw new Error("No user id on given user");
+    if (!isValid(user, userSchema)) throw new Error("Invalid data");
 
     const response = await put<User>(
       Endpoint.updateUser(user.userId),

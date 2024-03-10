@@ -26,18 +26,21 @@ const SearchPage = () => {
     try {
       setIsLoading(true);
       const response = await search(searchQuery, searchStart, 10);
-      const imageItems = response.items.map((img): ImageItem => {
-        return new ImageItem(
-          Md5.hashStr(img.link),
-          img.title,
-          img.snippet,
-          img.link,
-          img.image.contextLink,
-          img.image.thumbnailLink,
-          img.image.width,
-          img.image.height,
-        );
-      });
+      let imageItems: ImageItem[] = [];
+      if (response.items) {
+        imageItems = response.items.map((img): ImageItem => {
+          return new ImageItem(
+            Md5.hashStr(img.link),
+            img.title,
+            img.snippet,
+            img.link,
+            img.image.contextLink,
+            img.image.thumbnailLink,
+            img.image.width,
+            img.image.height,
+          );
+        });
+      }
 
       if (response)
         setImages(appendResults ? [...images, ...imageItems] : [...imageItems]);
@@ -85,7 +88,7 @@ const SearchPage = () => {
         )}
       </div>
       {searchInfo && <ImageGrid images={images} />}
-      {searchInfo && (
+      {searchInfo && images.length > 0 && (
         <div className="flex w-full justify-center pt-4 sm:pt-8">
           <Button onClick={handleLoadMore} disabled={isLoading}>
             {isLoading ? "Loading..." : "Load more"}

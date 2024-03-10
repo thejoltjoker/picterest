@@ -21,15 +21,20 @@ const SavedPage = () => {
   // });
 
   return (
-    <div className="flex">
-      <div className="grow">
-        {favorites ? (
-          <ImageGrid images={favorites} />
-        ) : (
-          <p className="text-center text-slate-500">No images saved.</p>
-        )}
+    <>
+      <div className="mx-auto w-fit pb-16 font-heading text-4xl font-bold dark:text-stone-100 sm:hidden">
+        <h2>Saved</h2>
       </div>
-    </div>
+      <div className="flex">
+        <div className="grow">
+          {favorites ? (
+            <ImageGrid images={favorites} />
+          ) : (
+            <p className="text-center text-slate-500">No images saved.</p>
+          )}
+        </div>
+      </div>
+    </>
   );
 };
 

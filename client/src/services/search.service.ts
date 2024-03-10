@@ -28,6 +28,7 @@ export const search = async (
     url.searchParams.append("q", query);
 
     const response = await axios.get<SearchResult>(url.toString());
+    console.log(response.data);
     const data = response.data;
     return data;
   } catch (error) {

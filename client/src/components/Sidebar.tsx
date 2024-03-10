@@ -11,7 +11,7 @@ import SidebarListItem from "./SidebarListItem";
 import SidebarSignIn from "./SidebarSignIn";
 import SidebarSignOut from "./SidebarSignOut";
 import SidebarThemeToggle from "./SidebarThemeToggle";
-
+// TODO Change drawer color
 const Sidebar = () => {
   const { isAuthenticated } = useAuth0();
   const { favorites } = useFavoritesContext();
@@ -51,7 +51,7 @@ const Sidebar = () => {
             <li className="mb-8 flex h-12 items-center">
               <Link to={isAuthenticated ? "/search" : "/"}>
                 <span className="group flex items-center rounded-lg p-2 font-heading text-xl  font-bold hover:bg-stone-100 dark:text-stone-100 hover:dark:bg-zinc-800">
-                  <FaCameraRetro className="text-theme-400 -mt-[1px] text-xl" />
+                  <FaCameraRetro className="-mt-[1px] text-xl text-theme-400" />
                   <span className="ms-3">Picterest</span>
                 </span>
               </Link>
@@ -68,7 +68,7 @@ const Sidebar = () => {
                 href={"/saved"}
                 icon={<FaHeart />}
                 badge={
-                  <span className="bg-theme-100/50 text-theme-900 dark:bg-theme-400/50 ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full p-3 text-sm font-medium dark:text-stone-100">
+                  <span className="ms-3 inline-flex h-3 w-3 items-center justify-center rounded-full bg-theme-100/50 p-3 text-sm font-medium text-theme-900 dark:bg-theme-400/50 dark:text-stone-100">
                     {favorites.length}
                   </span>
                 }
