@@ -11,7 +11,7 @@ interface ImageGridItemProps {
 const ImageGridItem = ({ image, index }: ImageGridItemProps) => {
   return (
     <div
-      className="slide-up group relative mt-4 rounded-2xl bg-slate-200 transition duration-300 first:mt-0 hover:scale-[102%] sm:mt-8"
+      className="slide-up group relative mt-4 rounded-2xl border border-stone-300 bg-stone-300 transition duration-300 first:mt-0 hover:scale-[102%] dark:border-stone-700 dark:bg-stone-800 sm:mt-8"
       style={
         {
           "--i": index,
@@ -30,6 +30,7 @@ const ImageGridItem = ({ image, index }: ImageGridItemProps) => {
           <FaLink />
         </div>
       </Link>
+      {/* TODO make image component with broken image display */}
       <img
         src={image.image.thumbnailLink}
         alt={image.title}

@@ -6,7 +6,7 @@ import Logotype from "../components/Logotype";
 import SearchBar from "../components/SearchBar";
 import { ImageItem } from "../models/ImageItem";
 import { search } from "../services/search.service";
-// TODO add load more button
+
 const SearchPage = () => {
   const [query, setQuery] = useState("");
   const [correctedQuery, setCorrectedQuery] = useState("");
@@ -24,14 +24,12 @@ const SearchPage = () => {
     setIsError(false);
     setCorrectedQuery("");
     try {
-      // TODO Create service for searching
-      // TODO Move api search to separate branch and use google api in client
       setIsLoading(true);
       const response = await search(searchQuery, searchStart, 10);
       const imageItems = response.items.map((img): ImageItem => {
         return { ...img, id: Md5.hashStr(img.link) };
       });
-      console.log(imageItems);
+
       if (response)
         setImages(appendResults ? [...images, ...imageItems] : [...imageItems]);
       setIsLoading(false);

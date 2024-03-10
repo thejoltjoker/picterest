@@ -6,8 +6,5 @@
   "scripts": {},
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express-oauth2-jwt-bearer": "^1.6.0"
-  }
+  "license": "ISC"
 }

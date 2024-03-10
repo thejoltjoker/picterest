@@ -14,7 +14,7 @@ const SidebarSignIn = () => {
 
   return (
     <button
-      className="group flex items-center rounded-lg p-2 text-stone-900 hover:bg-stone-100"
+      className="group flex w-full items-center rounded-lg p-2 text-left text-stone-900 hover:bg-stone-200 dark:text-stone-400 hover:dark:bg-zinc-800"
       onClick={handleLogin}
     >
       <FaRightToBracket className="text-xl" />

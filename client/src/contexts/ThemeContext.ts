@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, createContext, useContext } from "react";
 
-export type ThemeContent = {
+type ThemeContent = {
   theme: "light" | "dark" | undefined;
   setTheme: Dispatch<SetStateAction<"light" | "dark" | undefined>>;
 };
