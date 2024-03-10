@@ -2,19 +2,20 @@ import cors from "cors";
 import "dotenv/config";
 import express from "express";
 import swaggerUi from "swagger-ui-express";
-import router from "./routes/index.route";
+import router from "./routes";
 import { initDb } from "./services/database";
-import swaggerOutput from "./swagger_output.json";
+import { swaggerSpec } from "./swagger";
 
 initDb();
 
 const app = express();
 const port = process.env.PORT ?? 3000;
+
 app.use(cors());
 app.use(express.json());
 
 // TODO add swagger docs
-app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerOutput));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api", router);
 
 app.use((req, res) => {

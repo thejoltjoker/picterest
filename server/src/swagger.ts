@@ -1,33 +1,90 @@
-import swaggerAutogen from "swagger-autogen";
+import swaggerJSDoc from "swagger-jsdoc";
 
-const doc = {
-  info: {
-    version: "v1.0.0",
-    title: "Image search Express API",
-    description: "Image search Express API",
-  },
-  servers: [
-    {
-      url: "http://localhost:3000",
-      description: "",
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Picterest API",
+      description: "API for saving users and favorites.",
+      version: "1.0.0",
     },
-  ],
-  components: {
-    securitySchemes: {
-      bearerAuth: {
-        type: "http",
-        scheme: "bearer",
+    servers: [
+      {
+        url: "http://localhost:3000/api/",
+      },
+    ],
+    components: {
+      schemas: {
+        ImageItem: {
+          type: "object",
+          properties: {
+            imageId: {
+              type: "string",
+            },
+            title: {
+              type: "string",
+            },
+            snippet: {
+              type: "string",
+            },
+            link: {
+              type: "string",
+            },
+            contextLink: {
+              type: "string",
+            },
+            thumbnailLink: {
+              type: "string",
+            },
+            width: {
+              type: "number",
+            },
+            height: {
+              type: "number",
+            },
+          },
+        },
+        User: {
+          type: "object",
+          properties: {
+            userId: {
+              type: "string",
+            },
+            favorites: {
+              type: "array",
+              items: {
+                $ref: "#/components/schemas/ImageItem",
+              },
+            },
+          },
+        },
+        GetFavoritesResponse: {
+          type: "object",
+          properties: {
+            favorites: {
+              type: "array",
+              items: {
+                $ref: "#/components/schemas/ImageItem",
+              },
+            },
+          },
+        },
+        Database: {
+          type: "object",
+          properties: {
+            users: {
+              type: "array",
+              items: {
+                $ref: "#/components/schemas/User",
+              },
+            },
+          },
+        },
       },
     },
-    schemas: {
-      ImageItem: { $ref: "./models/ImageItem.ts#ImageItem" },
-    },
   },
+
+  apis: ["./src/routes/*.ts"],
 };
 
-const outputFile = "./swagger_output.json";
-const routes = ["./src/routes/index.route.ts"];
-
-swaggerAutogen({ openapi: "3.0.0" })(outputFile, routes, doc).then(async () => {
-  await import("./server"); // Your project's root file
-});
+export const swaggerSpec = swaggerJSDoc(swaggerOptions);
