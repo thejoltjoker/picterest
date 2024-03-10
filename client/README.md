@@ -1,4 +1,4 @@
-# client
+# React Frontend for Image Search
 
 ## Description
 
