@@ -20,7 +20,9 @@ export const create = async (
     user = new User(userId, []);
   }
 
-  const existingFavorite = user.favorites.find((img) => img.id === image.id);
+  const existingFavorite = user.favorites.find(
+    (img) => img.imageId === image.imageId
+  );
   if (existingFavorite) {
     return existingFavorite;
   }
@@ -58,7 +60,7 @@ export const remove = async (
   const user = database?.users.find((u) => u.userId === userId);
   if (!user) return;
 
-  user.favorites = user.favorites.filter((img) => img.id != imageId);
+  user.favorites = user.favorites.filter((img) => img.imageId != imageId);
 
   await updateUser(userId, user);
   return true;

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ImageItem } from "../models/ImageItem";
 import SaveImage from "./SaveImage";
 // TODO Show placeholder on broken img
+// TODO add background to link
 interface ImageGridItemProps {
   image: ImageItem;
   index: number;
@@ -15,14 +16,14 @@ const ImageGridItem = ({ image, index }: ImageGridItemProps) => {
       style={
         {
           "--i": index,
-          aspectRatio: `${image.image.thumbnailWidth} / ${image.image.thumbnailHeight}`,
+          aspectRatio: `${image.width} / ${image.height}`,
         } as React.CSSProperties
       }
     >
       <div className="absolute left-3 top-3 z-20">
         <SaveImage image={image} />
       </div>
-      <Link to={image.image.contextLink}>
+      <Link to={image.contextLink}>
         <div className="image-title absolute bottom-3 left-3 z-20 w-full overflow-clip whitespace-nowrap text-white opacity-0 transition duration-200 group-hover:opacity-100">
           {image.title}
         </div>
@@ -32,11 +33,11 @@ const ImageGridItem = ({ image, index }: ImageGridItemProps) => {
       </Link>
       {/* TODO make image component with broken image display */}
       <img
-        src={image.image.thumbnailLink}
+        src={image.thumbnailLink}
         alt={image.title}
         className="z-10 w-full overflow-hidden rounded-2xl transition duration-300 group-hover:shadow-xl"
         style={{
-          aspectRatio: `${image.image.thumbnailWidth} / ${image.image.thumbnailHeight}`,
+          aspectRatio: `${image.width} / ${image.height}`,
         }}
         onMouseOver={(e) => (e.currentTarget.src = image.link)}
       />

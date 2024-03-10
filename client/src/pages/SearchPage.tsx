@@ -27,7 +27,16 @@ const SearchPage = () => {
       setIsLoading(true);
       const response = await search(searchQuery, searchStart, 10);
       const imageItems = response.items.map((img): ImageItem => {
-        return { ...img, id: Md5.hashStr(img.link) };
+        return new ImageItem(
+          Md5.hashStr(img.link),
+          img.title,
+          img.snippet,
+          img.link,
+          img.image.contextLink,
+          img.image.thumbnailLink,
+          img.image.width,
+          img.image.height,
+        );
       });
 
       if (response)
