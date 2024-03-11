@@ -18,7 +18,9 @@ export const Auth0ProviderWithNavigate = ({
   };
 
   if (!(domain && clientId && redirectUri)) {
-    return null;
+    return (
+      <p className="pt-[20vh] text-center text-xl">.env not set up correctly</p>
+    );
   }
 
   return (
