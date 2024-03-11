@@ -6,7 +6,7 @@
     "start": "concurrently \"npm run start-server\" \"npm run start-client\"",
     "start-server": "cd server && npm run dev",
     "start-client": "cd client && npm run dev",
-    "setup": "npm run setup-server && npm run setup-client",
+    "setup": "npm i && npm run setup-server && npm run setup-client",
     "setup-server": "cd server && npm i",
     "setup-client": "cd client && npm i"
   },
