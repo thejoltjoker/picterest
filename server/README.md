@@ -37,7 +37,7 @@ Before you begin, make sure you have the following installed:
 Start the server with the following command:
 
 ```bash
-npm start
+npm run dev
 ```
 
 Visit `http://localhost:3000/api/docs` in your browser to access the api documentation.
